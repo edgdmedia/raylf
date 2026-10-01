@@ -77,7 +77,7 @@ export default function GalleryClient() {
                     setAlbum(chip);
                     setOpen(-1);
                   }}
-                  className="cursor-pointer rounded-[var(--radius-pill)] px-[18px] py-[9px] text-sm font-semibold transition-all duration-250"
+                  className="cursor-pointer rounded-[var(--radius-pill)] px-[18px] py-[9px] text-sm font-semibold transition-all duration-[250ms]"
                   style={{
                     fontFamily: "var(--font-body)",
                     border: "1px solid var(--t-line)",

@@ -155,13 +155,11 @@ export default async function ProgrammePage({ params }: Props) {
               From the journey.
             </h2>
           </div>
-          <div
-            className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-5 [&>*]:[grid-auto-rows:280px]"
-          >
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-5 [grid-auto-rows:280px]">
             {momentPhotos.map((src) => (
               <div
                 key={src}
-                className="h-[280px] rounded-[var(--radius-lg)] bg-cover bg-center"
+                className="rounded-[var(--radius-lg)] bg-cover bg-center"
                 style={{ backgroundImage: `url(${src})` }}
               />
             ))}

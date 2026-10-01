@@ -75,7 +75,7 @@ export default function AwardsClient() {
                 <button
                   key={e.year}
                   onClick={() => pickYear(e.year)}
-                  className="cursor-pointer rounded-[var(--radius-pill)] px-6 py-3 text-base font-semibold transition-all duration-250"
+                  className="cursor-pointer rounded-[var(--radius-pill)] px-6 py-3 text-base font-semibold transition-all duration-[250ms]"
                   style={{
                     fontFamily: "var(--font-display)",
                     border: `1px solid ${on ? "#FFF3A8" : "rgba(255,255,255,.35)"}`,
@@ -111,7 +111,7 @@ export default function AwardsClient() {
                   <button
                     key={c}
                     onClick={() => setCat(c)}
-                    className="cursor-pointer rounded-[var(--radius-pill)] px-[18px] py-[9px] text-sm font-semibold transition-all duration-250"
+                    className="cursor-pointer rounded-[var(--radius-pill)] px-[18px] py-[9px] text-sm font-semibold transition-all duration-[250ms]"
                     style={{
                       fontFamily: "var(--font-body)",
                       border: "1px solid var(--t-line)",

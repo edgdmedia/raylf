@@ -208,7 +208,7 @@ export default function About() {
       <section className="pb-[120px]">
         <div className="container-raylf">
           <div
-            className="flex flex-wrap items-center justify-between gap-8 overflow-hidden rounded-[32px] bg-[var(--gradient-violet-sky)] px-8 py-20 md:px-12"
+            className="flex flex-wrap items-center justify-between gap-8 overflow-hidden rounded-[32px] bg-[image:var(--gradient-violet-sky)] px-8 py-20 md:px-12"
           >
             <h2
               className="max-w-[640px] text-[clamp(34px,4.5vw,64px)] leading-none tracking-[-0.03em] text-white"

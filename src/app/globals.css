@@ -244,6 +244,35 @@ a:hover {
   animation: raylf-pulse 6s ease-in-out infinite;
 }
 
+@keyframes raylf-kenburns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.08) translate(-1.2%, -1%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+.kenburns {
+  animation: raylf-kenburns 26s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hero-slide {
+  transition: opacity 2s ease-in-out;
+}
+
+/* The kenburns transform must win over the reduced-motion kill-switch */
+@media (prefers-reduced-motion: reduce) {
+  .kenburns {
+    animation: none;
+    transform: none;
+  }
+}
+
 /* ============================================================
    Interactive helpers (hover lifts, button states)
    ============================================================ */
@@ -264,13 +293,84 @@ a:hover {
   transform: translateY(-4px);
 }
 
+/* ============================================================
+   Buttons — real CSS so gradients render via background (not
+   background-color, which cannot hold a linear-gradient)
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+  border-radius: var(--radius-pill);
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s var(--ease-standard);
+}
+
+.btn-sm { padding: 8px 18px; font-size: 13px; }
+.btn-md { padding: 13px 28px; font-size: 15px; }
+.btn-lg { padding: 16px 36px; font-size: 16px; }
+
+.btn-primary {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--gold-600);
+  border-color: var(--gold-600);
+  color: var(--violet-950);
+}
+
+.btn-gold {
+  background: var(--gradient-gold);
+  color: var(--violet-950);
+}
+
 .btn-gold:hover {
   filter: brightness(1.08);
 }
 
+/* Theme-aware outline: white on dark themes, ink on light —
+   fills with the same color on hover */
+.btn-outline {
+  background: transparent;
+  border-color: var(--t-fg);
+  color: var(--t-fg);
+}
+
+.btn-outline:hover {
+  background: var(--t-fg);
+  border-color: var(--t-fg);
+  color: var(--t-bg);
+}
+
+.btn-outline-light {
+  background: transparent;
+  border-color: #fff;
+  color: #fff;
+}
+
 .btn-outline-light:hover {
-  background: #ffffff !important;
-  color: var(--brand-primary) !important;
+  background: #fff;
+  color: var(--brand-primary);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--t-fg);
+}
+
+.btn-ghost:hover {
+  color: var(--t-gold);
 }
 
 .theme-toggle:hover {

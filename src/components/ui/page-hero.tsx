@@ -51,12 +51,12 @@ export function PageHero({
 
   return (
     <section
-      className="relative flex -mt-[84px] flex-col justify-end"
+      className="relative -mt-[84px] flex flex-col justify-end overflow-hidden"
       style={{ background: "#240145", minHeight: height }}
     >
       {image && (
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="kenburns absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${image})` }}
         />
       )}

@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { SocialLinks } from "@/components/ui/social-links";
+import { HeroBackdrop } from "@/components/ui/hero-backdrop";
 import {
   facts,
   programmes,
@@ -19,6 +20,12 @@ export const metadata: Metadata = {
     "RAYLF recognises and convenes the most outstanding 20 to 39-year olds across the globe, shaping, transforming and anchoring the future of the continent.",
 };
 
+const heroImages = [
+  "/photos/award-stage-01.jpg",
+  "/photos/award-presentation-04.jpg",
+  "/photos/award-presentation-01.jpg",
+];
+
 const marqueeRow = [...marqueeWords, ...marqueeWords, ...marqueeWords, ...marqueeWords];
 
 export default function Home() {
@@ -28,10 +35,7 @@ export default function Home() {
 
       {/* HERO */}
       <section className="relative flex min-h-screen -mt-[84px] flex-col justify-end">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(/photos/award-stage-01.jpg)" }}
-        />
+        <HeroBackdrop images={heroImages} />
         <div
           className="absolute inset-0"
           style={{
@@ -436,7 +440,7 @@ export default function Home() {
       <section className="py-[120px]">
         <div className="container-raylf">
           <div
-            className="relative overflow-hidden rounded-[32px] bg-[var(--gradient-violet-sky)] px-8 py-[96px] text-center text-white md:px-12"
+            className="relative overflow-hidden rounded-[32px] bg-[image:var(--gradient-violet-sky)] px-8 py-[96px] text-center text-white md:px-12"
           >
             <div
               className="pointer-events-none absolute left-1/2 h-[720px] w-[720px] -translate-x-1/2 rounded-full"
