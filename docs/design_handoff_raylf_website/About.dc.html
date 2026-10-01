@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/icons.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/base.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/styles.css">
+  <script src="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/_ds_bundle.js"></script>
+  <style>
+    body{margin:0;background:#240145;}
+    a{color:#fff3a8;text-decoration:none;transition:color .2s}
+    a:hover{color:#f2b84b}
+    [data-theme=dark]{--t-bg:#240145;--t-fg:#fff;--t-muted:rgba(255,255,255,.78);--t-line:rgba(255,243,168,.18);--t-gold:#f2b84b;--t-sec:radial-gradient(90% 60% at 80% 35%,#6a0da4 0%,#47017e 40%,#240145 100%);--t-shadow:0 30px 80px rgba(10,0,25,.6);}
+    [data-theme=light]{--t-bg:#faf8f5;--t-fg:#16121d;--t-muted:#3b3645;--t-line:rgba(53,30,93,.14);--t-gold:#a8761a;--t-sec:#efe6fb;--t-shadow:0 30px 80px rgba(30,15,56,.22);}
+  </style>
+</helmet>
+
+<div data-theme="{{ theme }}" style="background:var(--t-bg);color:var(--t-fg);font-family:var(--font-body);overflow-x:clip;transition:background .4s cubic-bezier(.2,.7,.2,1),color .4s;">
+  <dc-import name="RAYLF Nav" active="about" theme="{{ theme }}" on-toggle-theme="{{ toggleTheme }}" style="position:sticky;top:0;z-index:50;display:block;" hint-size="100%,84px"></dc-import>
+
+  <section data-screen-label="About Hero" style="position:relative;margin-top:-84px;min-height:78vh;display:flex;flex-direction:column;justify-content:flex-end;background:#240145;">
+    <div style="position:absolute;inset:0;background:url(assets/photos/royal-audience.jpg) center/cover;"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,1,69,.6) 0%,rgba(36,1,69,.45) 40%,rgba(36,1,69,.95) 85%,#240145 100%);"></div>
+    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,243,168,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,243,168,.07) 1px,transparent 1px);background-size:88px 88px;-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 40%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0%,#000 40%,transparent 100%);"></div>
+    <div style="position:relative;width:100%;max-width:1320px;margin:0 auto;padding:200px var(--container-pad) 72px;box-sizing:border-box;display:flex;flex-direction:column;gap:28px;">
+      <div style="display:flex;gap:10px;align-items:center;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);">
+        <a href="RAYLF Website.dc.html" style="color:rgba(255,255,255,.7);">Home</a>
+        <i class="fa-solid fa-chevron-right" style="font-size:10px;"></i>
+        <span style="color:#fff3a8;">About</span>
+      </div>
+      <h1 style="margin:0;color:#fff;font-family:var(--font-display);font-weight:700;font-size:clamp(52px,9vw,132px);line-height:.92;letter-spacing:-.04em;">Our <span style="background:var(--gradient-gold);-webkit-background-clip:text;background-clip:text;color:transparent;">History</span></h1>
+      <p style="margin:0;max-width:640px;font-size:19px;line-height:1.6;color:rgba(255,255,255,.82);text-wrap:pretty;">A programme of the Royal African Foundation, convening the most outstanding 20 to 39-year olds across the globe under royal patronage.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Who We Are" style="padding:140px var(--container-pad);">
+    <div style="max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:72px;align-items:start;">
+      <div style="display:flex;flex-direction:column;gap:24px;position:sticky;top:120px;">
+        <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.Eyebrow" tone="gold" hint-size="160px,18px">Who We Are</x-import>
+        <h2 style="margin:0;color:var(--t-fg);font-family:var(--font-display);font-weight:700;font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-.03em;text-wrap:balance;">Rooted in the Kingdoms of Africa.</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:24px;">
+        <p style="margin:0;font-size:20px;line-height:1.65;color:var(--t-fg);text-wrap:pretty;">RAYLF’s mission is to redefine centuries of the rich resilient spirit of African Kingdoms which embodies many defining principles of its identity.</p>
+        <p style="margin:0;font-size:18px;line-height:1.7;color:var(--t-muted);text-wrap:pretty;">The Royal African Young Leadership Forum is a programme of the Royal African Foundation of His Imperial Majesty Oba Adeyeye Enitan Ogunwusi, Ojaja II, the 51st Ooni of Ife. It recognises and convenes young African leaders aged 20 to 39, chiefly through the RAYLF Awards.</p>
+        <p style="margin:0;font-size:18px;line-height:1.7;color:var(--t-muted);text-wrap:pretty;">Through the Awards and programmes such as G2G Millionaires, RAYLF celebrates the success stories of young leaders and connects them to Africa’s economic prosperity, the blessings of its natural resources and the valuable inheritance of its creative culture.</p>
+        <div style="margin-top:24px;aspect-ratio:16/10;border-radius:var(--radius-lg);background:url(assets/photos/award-presentation-03.jpg) center/cover;box-shadow:var(--t-shadow);"></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Pillars" style="padding:120px var(--container-pad);background:var(--t-sec);">
+    <div style="max-width:1320px;margin:0 auto;display:flex;flex-direction:column;gap:56px;">
+      <div style="display:flex;flex-direction:column;gap:20px;max-width:720px;">
+        <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.Eyebrow" tone="{{ eyebrowTone }}" hint-size="160px,18px">Our Mission</x-import>
+        <h2 style="margin:0;color:var(--t-fg);font-family:var(--font-display);font-weight:700;font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-.03em;">Shaping. Transforming. Anchoring.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1px;background:var(--t-line);border-radius:var(--radius-lg);overflow:hidden;">
+        <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="3">
+          <div style="background:var(--t-bg);padding:40px 32px;display:flex;flex-direction:column;gap:18px;min-height:280px;box-sizing:border-box;">
+            <span style="font-family:var(--font-display);font-weight:600;font-size:14px;letter-spacing:.1em;color:var(--t-gold);">{{ p.n }}</span>
+            <h3 style="margin:0;margin-top:auto;color:var(--t-fg);font-family:var(--font-display);font-weight:700;font-size:32px;letter-spacing:-.02em;">{{ p.title }}</h3>
+            <p style="margin:0;font-size:16px;line-height:1.65;color:var(--t-muted);">{{ p.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Royal Patron" style="position:relative;padding:140px var(--container-pad);background:#240145;color:#fff;">
+    <div style="position:absolute;right:-200px;top:50%;width:800px;height:800px;transform:translateY(-50%);border-radius:50%;background:radial-gradient(circle,rgba(180,73,220,.35) 0%,rgba(180,73,220,0) 65%);"></div>
+    <div style="position:relative;max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:80px;align-items:center;">
+      <div style="position:relative;">
+        <div style="position:absolute;inset:24px -24px -24px 24px;border:2px solid var(--gold-500);border-radius:var(--radius-lg);"></div>
+        <div style="position:relative;aspect-ratio:4/5;border-radius:var(--radius-lg);background:url(assets/photos/his-majesty-throne.jpg) center/cover;box-shadow:0 30px 80px rgba(10,0,25,.6);"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:28px;">
+        <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.Eyebrow" tone="light" hint-size="160px,18px">Royal Patron</x-import>
+        <h2 style="margin:0;color:#fff;font-family:var(--font-display);font-weight:700;font-size:clamp(34px,4vw,56px);line-height:1.05;letter-spacing:-.03em;text-wrap:balance;">His Imperial Majesty Oba Adeyeye Enitan Ogunwusi, Ojaja II</h2>
+        <p style="margin:0;font-size:18px;line-height:1.7;color:rgba(255,255,255,.8);">The 51st Ooni of Ife and founder of the Royal African Foundation, under whose patronage RAYLF recognises young African leaders.</p>
+        <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.RoyalQuote" tone="dark" size="lg" attribution="His Imperial Majesty (H.I.M) Ooni of Ife" hint-size="100%,140px">Young Africans are the spirit, soul and memory of Africa.</x-import>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Timeline" style="padding:140px var(--container-pad);">
+    <div style="max-width:1320px;margin:0 auto;display:flex;flex-direction:column;gap:64px;">
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.Eyebrow" tone="gold" hint-size="160px,18px">Milestones</x-import>
+        <h2 style="margin:0;color:var(--t-fg);font-family:var(--font-display);font-weight:700;font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-.03em;">The RAYLF Awards</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:32px;">
+        <sc-for list="{{ milestones }}" as="m" hint-placeholder-count="4">
+          <a href="Awards.dc.html" style="display:flex;flex-direction:column;gap:16px;color:var(--t-fg);" style-hover="color:var(--t-fg);">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="width:14px;height:14px;border-radius:50%;background:var(--gradient-gold);box-shadow:0 0 16px rgba(242,184,75,.6);flex:none;"></span>
+              <span style="flex:1;height:2px;border-radius:2px;background:var(--t-line);"></span>
+            </div>
+            <div style="font-family:var(--font-display);font-weight:700;font-size:72px;line-height:1;letter-spacing:-.04em;">{{ m.year }}</div>
+            <div style="font-size:16px;line-height:1.6;color:var(--t-muted);">{{ m.label }}</div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="CTA" style="padding:0 var(--container-pad) 120px;">
+    <div style="position:relative;max-width:1320px;margin:0 auto;border-radius:32px;overflow:hidden;background:var(--gradient-violet-sky);padding:80px 48px;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;">
+      <h2 style="margin:0;color:#fff;font-family:var(--font-display);font-weight:700;font-size:clamp(34px,4.5vw,64px);line-height:1;letter-spacing:-.03em;max-width:640px;">Explore our programmes.</h2>
+      <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.Button" variant="gold" size="lg" href="Programmes.dc.html" icon-right="fa-solid fa-arrow-right" hint-size="200px,56px">Programmes</x-import>
+    </div>
+  </section>
+
+  <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.SiteFooter" hint-size="100%,320px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark' | 'light'&quot;}}">
+class Component extends DCLogic {
+  state = { theme: (() => { try { return localStorage.getItem('raylf-theme'); } catch (e) { return null; } })() };
+  renderVals() {
+    const theme = this.state.theme ?? this.props.theme ?? 'dark';
+    const light = theme === 'light';
+    return {
+      theme,
+      toggleTheme: () => { const t = light ? 'dark' : 'light'; try { localStorage.setItem('raylf-theme', t); } catch (e) {} this.setState({ theme: t }); },
+      eyebrowTone: light ? 'gold' : 'light',
+      pillars: [
+        { n: '01', title: 'Shaping', body: 'Recognising young leaders early and setting a standard of excellence rooted in African heritage.' },
+        { n: '02', title: 'Transforming', body: 'Equipping young Africans to turn ideas into enterprises, institutions and movements.' },
+        { n: '03', title: 'Anchoring', body: 'Connecting each generation of leaders to the royal institutions and culture of the continent.' }
+      ],
+      milestones: [
+        { year: '2020', label: 'First edition of the RAYLF Awards' },
+        { year: '2021', label: 'Second edition of the RAYLF Awards' },
+        { year: '2022', label: 'Third edition of the RAYLF Awards' },
+        { year: '2024', label: 'Fourth edition of the RAYLF Awards' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

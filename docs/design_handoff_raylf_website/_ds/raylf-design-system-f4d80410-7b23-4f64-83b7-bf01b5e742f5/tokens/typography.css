@@ -1,0 +1,16 @@
+:root{
+--font-display:'Poppins',system-ui,sans-serif;
+--font-body:'Manrope',system-ui,sans-serif;
+--fw-regular:400;/* @kind font */
+--fw-medium:500;/* @kind font */
+--fw-semibold:600;/* @kind font */
+--fw-bold:700;/* @kind font */
+--fw-black:800;/* @kind font */
+--fs-display:72px;--fs-h1:52px;--fs-h2:40px;--fs-h3:28px;--fs-h4:22px;--fs-h5:18px;--fs-body-lg:18px;--fs-body:16px;--fs-small:14px;--fs-caption:12px;--fs-eyebrow:13px;
+--lh-tight:1.1;/* @kind font */
+--lh-snug:1.25;/* @kind font */
+--lh-body:1.65;/* @kind font */
+--ls-tight:-0.02em;/* @kind font */
+--ls-normal:0;/* @kind font */
+--ls-eyebrow:0.18em;/* @kind font */
+}

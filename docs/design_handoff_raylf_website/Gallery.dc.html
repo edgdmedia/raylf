@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/icons.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/base.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/styles.css">
+  <script src="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/_ds_bundle.js"></script>
+  <style>
+    body{margin:0;background:#240145;}
+    a{color:#fff3a8;text-decoration:none;transition:color .2s}
+    a:hover{color:#f2b84b}
+    [data-theme=dark]{--t-bg:#240145;--t-fg:#fff;--t-muted:rgba(255,255,255,.78);--t-line:rgba(255,243,168,.18);--t-gold:#f2b84b;--t-chip:rgba(255,255,255,.06);--t-shadow:0 30px 80px rgba(10,0,25,.6);}
+    [data-theme=light]{--t-bg:#faf8f5;--t-fg:#16121d;--t-muted:#3b3645;--t-line:rgba(53,30,93,.14);--t-gold:#a8761a;--t-chip:#ffffff;--t-shadow:0 30px 80px rgba(30,15,56,.22);}
+  </style>
+</helmet>
+
+<div data-theme="{{ theme }}" style="background:var(--t-bg);color:var(--t-fg);font-family:var(--font-body);overflow-x:clip;transition:background .4s cubic-bezier(.2,.7,.2,1),color .4s;">
+  <dc-import name="RAYLF Nav" active="gallery" theme="{{ theme }}" on-toggle-theme="{{ toggleTheme }}" style="position:sticky;top:0;z-index:50;display:block;" hint-size="100%,84px"></dc-import>
+
+  <section data-screen-label="Gallery Hero" style="position:relative;margin-top:-84px;padding:200px var(--container-pad) 72px;background:#240145;color:#fff;">
+    <div style="position:absolute;inset:0;background:radial-gradient(50% 70% at 85% 20%,rgba(180,73,220,.45) 0%,rgba(111,38,207,0) 70%);"></div>
+    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,243,168,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,243,168,.07) 1px,transparent 1px);background-size:88px 88px;-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 40%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0%,#000 40%,transparent 100%);"></div>
+    <div style="position:relative;max-width:1320px;margin:0 auto;display:flex;flex-direction:column;gap:28px;">
+      <div style="display:flex;gap:10px;align-items:center;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);">
+        <a href="RAYLF Website.dc.html" style="color:rgba(255,255,255,.7);">Home</a>
+        <i class="fa-solid fa-chevron-right" style="font-size:10px;"></i>
+        <span style="color:#fff3a8;">Gallery</span>
+      </div>
+      <h1 style="margin:0;color:#fff;font-family:var(--font-display);font-weight:700;font-size:clamp(52px,9vw,132px);line-height:.92;letter-spacing:-.04em;">Celebrate the <span style="background:var(--gradient-gold);-webkit-background-clip:text;background-clip:text;color:transparent;">journey.</span></h1>
+      <p style="margin:0;max-width:600px;font-size:19px;line-height:1.6;color:rgba(255,255,255,.82);">Celebrate your people. Moments from the RAYLF Awards and royal audiences.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Gallery Grid" style="padding:64px var(--container-pad) 120px;">
+    <div style="max-width:1320px;margin:0 auto;display:flex;flex-direction:column;gap:32px;">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <sc-for list="{{ albumChips }}" as="c" hint-placeholder-count="4">
+          <button onClick="{{ c.pick }}" style="padding:10px 20px;border-radius:var(--radius-pill);border:1px solid var(--t-line);background:{{ c.bg }};color:{{ c.color }};font-family:var(--font-body);font-weight:600;font-size:14px;cursor:pointer;transition:all .25s;">{{ c.label }}</button>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));grid-auto-rows:260px;grid-auto-flow:dense;gap:16px;">
+        <sc-for list="{{ photos }}" as="p" hint-placeholder-count="9">
+          <button onClick="{{ p.open }}" aria-label="Open photo" style="position:relative;padding:0;border:0;cursor:zoom-in;border-radius:var(--radius-lg);overflow:hidden;grid-row:{{ p.span }};background-size:cover;background-position:center;background-image:url({{ p.src }});transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s;" style-hover="transform:translateY(-4px);box-shadow:var(--t-shadow);">
+            <span style="position:absolute;left:12px;bottom:12px;padding:6px 12px;border-radius:var(--radius-pill);background:rgba(36,1,69,.78);color:#fff3a8;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">{{ p.album }}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Follow" style="padding:0 var(--container-pad) 120px;">
+    <div style="max-width:1320px;margin:0 auto;border-radius:32px;background:var(--gradient-royal);padding:64px 48px;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;color:#fff;">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#fff3a8;">Follow the journey</div>
+        <div style="font-family:var(--font-display);font-weight:700;font-size:clamp(30px,4vw,52px);letter-spacing:-.03em;">@royalafricanlyf</div>
+      </div>
+      <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.SocialLinks" variant="pill" networks="{{ pillNetworks }}" hint-size="320px,52px"></x-import>
+    </div>
+  </section>
+
+  <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ close }}" style="position:fixed;inset:0;z-index:100;background:rgba(36,1,69,.92);display:flex;align-items:center;justify-content:center;padding:48px;box-sizing:border-box;">
+      <img src="{{ current.src }}" alt="" style="max-width:100%;max-height:100%;border-radius:var(--radius-lg);box-shadow:0 30px 80px rgba(0,0,0,.5);">
+      <button onClick="{{ close }}" aria-label="Close" style="position:absolute;top:24px;right:24px;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;font-size:18px;cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+      <button onClick="{{ prev }}" aria-label="Previous" style="position:absolute;left:24px;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:0;background:#fff3a8;color:#240145;font-size:16px;cursor:pointer;"><i class="fa-solid fa-chevron-left"></i></button>
+      <button onClick="{{ next }}" aria-label="Next" style="position:absolute;right:24px;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:0;background:#fff3a8;color:#240145;font-size:16px;cursor:pointer;"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </sc-if>
+
+  <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.SiteFooter" hint-size="100%,320px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark' | 'light'&quot;}}">
+class Component extends DCLogic {
+  state = { theme: (() => { try { return localStorage.getItem('raylf-theme'); } catch (e) { return null; } })(), album: 'All', open: -1 };
+  renderVals() {
+    const theme = this.state.theme ?? this.props.theme ?? 'dark';
+    const light = theme === 'light';
+    const all = [
+      ['award-stage-01', 'Awards 2024', 2], ['award-presentation-01', 'Awards 2024', 1], ['his-majesty-throne', 'Royal Audience', 2],
+      ['award-presentation-02', 'Awards 2022', 1], ['award-certificate-01', 'Awards 2024', 1], ['royal-audience', 'Royal Audience', 1],
+      ['speaker-portrait', 'Awards 2022', 2], ['award-presentation-03', 'Awards 2022', 1], ['award-greeting', 'Royal Audience', 1],
+      ['award-certificate-02', 'Awards 2021', 1], ['award-presentation-04', 'Awards 2021', 2], ['award-certificate-03', 'Awards 2021', 1]
+    ].map(([f, album, rows]) => ({ src: `assets/photos/${f}.jpg`, album, span: `span ${rows}` }));
+    const albums = ['All', 'Awards 2024', 'Awards 2022', 'Awards 2021', 'Royal Audience'];
+    const list = all.filter(p => this.state.album === 'All' || p.album === this.state.album);
+    const n = list.length, i = this.state.open;
+    return {
+      theme,
+      toggleTheme: () => { const t = light ? 'dark' : 'light'; try { localStorage.setItem('raylf-theme', t); } catch (e) {} this.setState({ theme: t }); },
+      albumChips: albums.map(a => {
+        const on = a === this.state.album;
+        return { label: a, pick: () => this.setState({ album: a, open: -1 }), bg: on ? 'var(--t-gold)' : 'var(--t-chip)', color: on ? (light ? '#fff' : '#240145') : 'var(--t-fg)' };
+      }),
+      photos: list.map((p, idx) => ({ ...p, open: () => this.setState({ open: idx }) })),
+      lightboxOpen: i >= 0 && i < n,
+      current: list[i] || {},
+      close: () => this.setState({ open: -1 }),
+      prev: (e) => { e.stopPropagation(); this.setState({ open: (i - 1 + n) % n }); },
+      next: (e) => { e.stopPropagation(); this.setState({ open: (i + 1) % n }); },
+      pillNetworks: ['youtube', 'facebook', 'instagram']
+    };
+  }
+}
+</script>
+</body>
+</html>

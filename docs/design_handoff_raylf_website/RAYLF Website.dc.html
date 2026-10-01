@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/icons.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/tokens/base.css">
+  <link rel="stylesheet" href="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/styles.css">
+  <script src="_ds/raylf-design-system-f4d80410-7b23-4f64-83b7-bf01b5e742f5/_ds_bundle.js"></script>
+  <style>
+    body{margin:0;background:#240145;}
+    [data-theme=dark]{--t-bg:#240145;--t-fg:#fff;--t-muted:rgba(255,255,255,.78);--t-line:rgba(255,243,168,.18);--t-gold:#f2b84b;--t-sec:radial-gradient(90% 60% at 80% 35%,#6a0da4 0%,#47017e 40%,#240145 100%);--t-map-scrim:linear-gradient(90deg,#240145 0%,rgba(36,1,69,.75) 55%,rgba(36,1,69,.35) 100%);--t-map-op:.5;--t-shadow:0 30px 80px rgba(10,0,25,.6);}
+    [data-theme=light]{--t-bg:#faf8f5;--t-fg:#16121d;--t-muted:#3b3645;--t-line:rgba(53,30,93,.14);--t-gold:#a8761a;--t-sec:#efe6fb;--t-map-scrim:linear-gradient(90deg,#faf8f5 0%,rgba(250,248,245,.88) 55%,rgba(250,248,245,.45) 100%);--t-map-op:.9;--t-shadow:0 30px 80px rgba(30,15,56,.22);}
+    a{color:#fff3a8;text-decoration:none;transition:color .2s}
+    a:hover{color:#f2b84b}
+    @keyframes raylf-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @keyframes raylf-pulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:.9;transform:scale(1.06)}}
+  </style>
+</helmet>
+
+<div data-theme="{{ theme }}" style="background:var(--t-bg);color:var(--t-fg);font-family:var(--font-body);overflow-x:clip;transition:background .4s cubic-bezier(.2,.7,.2,1),color .4s;">
+
+  <dc-import name="RAYLF Nav" active="home" theme="{{ theme }}" on-toggle-theme="{{ toggleTheme }}" style="position:sticky;top:0;z-index:50;display:block;" hint-size="100%,84px"></dc-import>
+
+  <!-- HERO -->
+  <section id="top" data-screen-label="Hero" style="position:relative;margin-top:-84px;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;">
+    <div style="position:absolute;inset:0;background:url(assets/photos/award-stage-01.jpg) center/cover;"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,1,69,.55) 0%,rgba(36,1,69,.35) 35%,rgba(36,1,69,.92) 78%,#240145 100%);"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(60% 50% at 78% 30%,rgba(180,73,220,.45) 0%,rgba(111,38,207,0) 70%);"></div>
+    <sc-if value="{{ showGrid }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,243,168,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,243,168,.07) 1px,transparent 1px);background-size:88px 88px;mask-image:linear-gradient(180deg,transparent 0%,#000 30%,#000 70%,transparent 100%);-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 30%,#000 70%,transparent 100%);"></div>
+    </sc-if>
+    {{ orb }}
+    <div style="position:relative;width:100%;max-width:1320px;margin:0 auto;padding:180px var(--container-pad) 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:40px;">
+      <div style="display:inline-flex;align-self:flex-start;align-items:center;gap:10px;padding:8px 16px 8px 10px;border-radius:var(--radius-pill);border:1px solid rgba(255,243,168,.35);font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff3a8;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#f2b84b;box-shadow:0 0 12px #f2b84b;"></span>
+        Royal African Young Leadership Forum
+      </div>
+      <h1 style="margin:0;color:#fff;font-family:var(--font-display);font-weight:700;font-size:clamp(52px,10vw,148px);line-height:.92;letter-spacing:-.04em;text-wrap:balance;max-width:1200px;">
+        A place for Africa’s <span style="background:var(--gradient-gold);-webkit-background-clip:text;background-clip:text;color:transparent;">young leaders.</span>
+      </h1>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:32px;align-items:end;border-top:1px solid rgba(255,255,255,.16);padding-top:32px;">
+        <p style="margin:0;font-size:19px;line-height:1.6;color:rgba(255,255,255,.82);max-width:520px;text-wrap:pretty;">RAYLF recognises and convenes the most outstanding 20 to 39-year olds across the globe, shaping, transforming and anchoring the future of the continent.</p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end;">
+          <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.Button" variant="gold" size="lg" href="Awards.dc.html" icon-right="fa-solid fa-arrow-right" hint-size="200px,56px">RAYLF Awards</x-import>
+          <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.Button" variant="outline-light" size="lg" href="About.dc.html" hint-size="180px,56px">About RAYLF</x-import>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <sc-if value="{{ showMarquee }}" hint-placeholder-val="{{ true }}">
+    <div style="border-top:1px solid rgba(255,243,168,.16);border-bottom:1px solid rgba(255,243,168,.16);background:var(--violet-900);padding:22px 0;overflow:hidden;">
+      {{ marquee }}
+    </div>
+  </sc-if>
+
+  <!-- ABOUT -->
+  <section id="about" data-screen-label="About" style="position:relative;padding:140px var(--container-pad);">
+    <div style="max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:72px;align-items:center;">
+      <div style="position:relative;">
+        <div style="position:absolute;inset:24px -24px -24px 24px;border:2px solid var(--gold-500);border-radius:var(--radius-lg);"></div>
+        <div style="position:relative;aspect-ratio:4/5;border-radius:var(--radius-lg);background:url(assets/photos/his-majesty-throne.jpg) center/cover;box-shadow:var(--t-shadow);"></div>
+        <div style="position:absolute;left:-12px;bottom:40px;padding:18px 22px;border-radius:var(--radius-md);background:var(--violet-700);border:1px solid rgba(255,243,168,.25);box-shadow:0 20px 50px rgba(10,0,25,.5);max-width:240px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#fff3a8;margin-bottom:6px;">Royal Patron</div>
+          <div style="font-family:var(--font-display);font-weight:600;font-size:16px;line-height:1.35;">His Imperial Majesty Oba Adeyeye Enitan Ogunwusi, Ojaja II</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:28px;">
+        <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.Eyebrow" tone="gold" hint-size="160px,18px">About RAYLF</x-import>
+        <h2 style="margin:0;color:var(--t-fg);font-family:var(--font-display);font-weight:700;font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-.03em;text-wrap:balance;">The spirit, soul and memory of Africa.</h2>
+        <p style="margin:0;font-size:18px;line-height:1.7;color:var(--t-muted);text-wrap:pretty;">RAYLF is a programme of the Royal African Foundation of His Imperial Majesty, the 51st Ooni of Ife. It exists to redefine centuries of the rich resilient spirit of African Kingdoms, which embodies many defining principles of its identity.</p>
+        <p style="margin:0;font-size:18px;line-height:1.7;color:var(--t-muted);text-wrap:pretty;">Through the RAYLF Awards and programmes such as G2G Millionaires, we celebrate the success stories of young leaders and connect them to a lineage of royal patronage.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--t-line);border-radius:var(--radius-md);overflow:hidden;margin-top:12px;">
+          <sc-for list="{{ facts }}" as="f" hint-placeholder-count="3">
+            <div style="background:var(--t-bg);padding:22px 20px;display:flex;flex-direction:column;gap:6px;">
+              <div style="font-family:var(--font-display);font-weight:700;font-size:34px;letter-spacing:-.03em;color:var(--t-gold);">{{ f.v }}</div>
+              <div style="font-size:13px;line-height:1.4;color:var(--t-muted);">{{ f.l }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMMES -->
+  <section id="programmes" data-screen-label="Programmes" style="position:relative;padding:120px var(--container-pad);background:var(--t-sec);">
+    <div style="max-width:1320px;margin:0 auto;display:flex;flex-direction:column;gap:56px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;">
+        <div style="display:flex;flex-direction:column;gap:20px;max-width:720px;">
+          <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.Eyebrow" tone="{{ eyebrowTone }}" hint-size="160px,18px">What We Do</x-import>
+          <h2 style="margin:0;color:var(--t-fg);font-family:var(--font-display);font-weight:700;font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-.03em;">Find your place.</h2>
+        </div>
+        <p style="margin:0;max-width:400px;font-size:17px;line-height:1.65;color:var(--t-muted);">Three ways RAYLF recognises, equips and connects young African leaders.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:20px;">
+        <sc-for list="{{ programmes }}" as="p" hint-placeholder-count="3">
+          <a href="{{ p.href }}" style="position:relative;display:flex;flex-direction:column;min-height:520px;border-radius:var(--radius-lg);overflow:hidden;color:#fff;border:1px solid rgba(255,243,168,.14);transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s;" style-hover="transform:translateY(-6px);border-color:rgba(242,184,75,.7);color:#fff;">
+            <div style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:url({{ p.img }});"></div>
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,1,69,.2) 0%,rgba(36,1,69,.55) 45%,rgba(36,1,69,.96) 100%);"></div>
+            <div style="position:relative;display:flex;justify-content:space-between;padding:24px;">
+              <span style="font-family:var(--font-display);font-weight:600;font-size:14px;letter-spacing:.1em;color:#fff3a8;">{{ p.n }}</span>
+              <span style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-arrow-right" style="transform:rotate(-45deg);"></i></span>
+            </div>
+            <div style="position:relative;margin-top:auto;padding:28px;display:flex;flex-direction:column;gap:12px;">
+              <h3 style="margin:0;color:#fff;font-family:var(--font-display);font-weight:700;font-size:32px;letter-spacing:-.02em;line-height:1.05;">{{ p.title }}</h3>
+              <p style="margin:0;font-size:15px;line-height:1.6;color:rgba(255,255,255,.8);">{{ p.body }}</p>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section data-screen-label="Quote" style="position:relative;padding:160px var(--container-pad);text-align:center;">
+    <div style="position:absolute;inset:0;background:url(assets/photos/royal-audience.jpg) center/cover;"></div>
+    <div style="position:absolute;inset:0;background:rgba(36,1,69,.88);"></div>
+    <div style="position:absolute;left:50%;top:50%;width:720px;height:720px;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(255,243,168,.14);"></div>
+    <div style="position:absolute;left:50%;top:50%;width:1040px;height:1040px;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(255,243,168,.08);"></div>
+    <div style="position:relative;max-width:1000px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:32px;">
+      <i class="fa-solid fa-quote-left" style="font-size:40px;color:#f2b84b;"></i>
+      <blockquote style="margin:0;font-family:var(--font-display);font-style:italic;font-weight:500;font-size:clamp(28px,3.6vw,48px);line-height:1.25;letter-spacing:-.015em;text-wrap:balance;">Young Africans are the spirit, soul and memory of Africa.</blockquote>
+      <div style="width:70px;height:3px;border-radius:3px;background:var(--gradient-gold);"></div>
+      <div style="font-size:14px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff3a8;">His Imperial Majesty (H.I.M) Ooni of Ife</div>
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section id="awards" data-screen-label="Awards" style="padding:140px var(--container-pad);">
+    <div style="max-width:1320px;margin:0 auto;display:flex;flex-direction:column;gap:64px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;">
+        <div style="display:flex;flex-direction:column;gap:20px;max-width:760px;">
+          <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.Eyebrow" tone="gold" hint-size="160px,18px">RAYLF Awards</x-import>
+          <h2 style="margin:0;color:var(--t-fg);font-family:var(--font-display);font-weight:700;font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-.03em;text-wrap:balance;">Every edition, a new generation.</h2>
+        </div>
+        <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.Button" variant="{{ outlineVariant }}" href="Awards.dc.html#awardees" icon-right="fa-solid fa-arrow-right" hint-size="160px,48px">Awardees</x-import>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px;">
+        <sc-for list="{{ editions }}" as="e" hint-placeholder-count="4">
+          <div style="position:relative;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:3/4;border:1px solid rgba(255,243,168,.14);">
+            <div style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:url({{ e.img }});"></div>
+            <div style="position:absolute;inset:0;background:var(--overlay-scrim);"></div>
+            <div style="position:absolute;left:0;right:0;top:0;padding:22px;display:flex;justify-content:space-between;align-items:center;">
+              <span style="padding:6px 12px;border-radius:var(--radius-pill);background:rgba(36,1,69,.7);border:1px solid rgba(255,243,168,.3);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff3a8;">{{ e.tag }}</span>
+            </div>
+            <div style="position:absolute;left:0;right:0;bottom:0;padding:24px;display:flex;flex-direction:column;gap:6px;">
+              <div style="font-family:var(--font-display);font-weight:700;font-size:64px;line-height:1;letter-spacing:-.04em;">{{ e.year }}</div>
+              <div style="font-size:14px;color:rgba(255,255,255,.8);">{{ e.label }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" data-screen-label="Gallery" style="padding:0 var(--container-pad) 140px;">
+    <div style="max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:220px;gap:16px;">
+      <div style="grid-column:span 2;grid-row:span 2;border-radius:var(--radius-lg);background:url(assets/photos/award-presentation-04.jpg) center/cover;"></div>
+      <div style="border-radius:var(--radius-lg);background:url(assets/photos/speaker-portrait.jpg) center/cover;"></div>
+      <div style="border-radius:var(--radius-lg);background:url(assets/photos/award-greeting.jpg) center/cover;"></div>
+      <div style="grid-column:span 2;border-radius:var(--radius-lg);background:var(--gradient-royal);padding:32px;display:flex;flex-direction:column;justify-content:space-between;box-sizing:border-box;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#fff3a8;">Follow the journey</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;">
+          <div style="font-family:var(--font-display);font-weight:700;font-size:32px;letter-spacing:-.02em;">@royalafricanlyf</div>
+          <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.SocialLinks" tone="light" networks="{{ networks }}" hint-size="140px,40px"></x-import>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GLOBAL MISSION -->
+  <section data-screen-label="Global Mission" style="position:relative;background:#240145;padding:140px var(--container-pad);">
+    <div style="position:absolute;inset:0;background:url(assets/brand/africa-world-map.jpg) center/cover;opacity:.5;"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,#240145 0%,rgba(36,1,69,.75) 55%,rgba(36,1,69,.35) 100%);"></div>
+    <div style="position:relative;max-width:1320px;margin:0 auto;display:flex;flex-direction:column;gap:24px;max-width:1320px;">
+      <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.Eyebrow" tone="light" hint-size="160px,18px">Global Mission</x-import>
+      <h2 style="margin:0;color:#fff;max-width:760px;font-family:var(--font-display);font-weight:700;font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-.03em;text-wrap:balance;">From Ile-Ife to the world.</h2>
+      <p style="margin:0;max-width:560px;font-size:18px;line-height:1.7;color:rgba(255,255,255,.8);text-wrap:pretty;">Africa’s economic prosperity, the blessings of its natural resources and the valuable inheritance of its creative culture, carried forward by young leaders across every continent.</p>
+    </div>
+  </section>
+
+  <!-- JOIN -->
+  <section id="join" data-screen-label="Join" style="padding:120px var(--container-pad);">
+    <div style="position:relative;max-width:1320px;margin:0 auto;border-radius:32px;overflow:hidden;background:var(--gradient-violet-sky);padding:96px 48px;text-align:center;box-sizing:border-box;">
+      <div style="position:absolute;left:50%;bottom:-360px;width:720px;height:720px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(242,184,75,.45) 0%,rgba(242,184,75,0) 65%);"></div>
+      <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:28px;">
+        <h2 style="margin:0;color:#fff;font-family:var(--font-display);font-weight:700;font-size:clamp(40px,6vw,88px);line-height:.95;letter-spacing:-.04em;text-wrap:balance;max-width:900px;">There’s a place for you.</h2>
+        <p style="margin:0;max-width:560px;font-size:18px;line-height:1.65;color:rgba(255,255,255,.88);">Discover the programmes through which RAYLF recognises, equips and connects young African leaders.</p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
+          <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.Button" variant="gold" size="lg" href="Programmes.dc.html" icon-right="fa-solid fa-arrow-right" hint-size="200px,56px">Our Programmes</x-import>
+          <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.Button" variant="outline-light" size="lg" href="About.dc.html" hint-size="160px,56px">About RAYLF</x-import>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <x-import component-from-global-scope="RAYLFDesignSystem_f4d804.SiteFooter" hint-size="100%,320px"></x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark' | 'light'&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;showGrid&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;showMarquee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sections&quot;}}">
+class Component extends DCLogic {
+  state = { theme: (() => { try { return localStorage.getItem('raylf-theme'); } catch (e) { return null; } })() };
+  componentDidUpdate(prev) { if (prev.theme !== this.props.theme) this.setState({ theme: null }); }
+  renderVals() {
+    const theme = this.state.theme ?? this.props.theme ?? 'dark';
+    const light = theme === 'light';
+    const themeVals = {
+      theme,
+      toggleTheme: () => { const t = light ? 'dark' : 'light'; try { localStorage.setItem('raylf-theme', t); } catch (e) {} this.setState({ theme: t }); },
+      themeIcon: light ? 'fa-solid fa-moon' : 'fa-solid fa-sun',
+      eyebrowTone: light ? 'gold' : 'light',
+      outlineVariant: light ? 'outline' : 'outline-light'
+    };
+    const words = ['Shaping', 'Transforming', 'Anchoring', 'Young Leaders', '20 to 39', 'RAYLF Awards', 'G2G Millionaires'];
+    const row = [...words, ...words, ...words, ...words];
+    const marquee = React.createElement('div', {
+      style: { display: 'flex', width: 'max-content', gap: 48, animation: 'raylf-marquee 40s linear infinite' }
+    }, row.map((w, i) => React.createElement('span', {
+      key: i,
+      style: { display: 'flex', alignItems: 'center', gap: 48, fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 28, letterSpacing: '-.01em', color: i % 2 ? '#fff' : '#f2b84b', whiteSpace: 'nowrap' }
+    }, w, React.createElement('i', { className: 'fa-solid fa-star', style: { fontSize: 12, color: 'rgba(255,243,168,.5)' } }))));
+    const orb = React.createElement('div', {
+      style: { position: 'absolute', right: '8%', top: '18%', width: 360, height: 360, borderRadius: '50%', border: '1px solid rgba(255,243,168,.3)', boxShadow: 'inset 0 0 80px rgba(180,73,220,.35), 0 0 120px rgba(180,73,220,.3)', animation: 'raylf-pulse 6s ease-in-out infinite', pointerEvents: 'none' }
+    });
+    return {
+      ...themeVals,
+      showGrid: this.props.showGrid ?? true,
+      showMarquee: this.props.showMarquee ?? true,
+      marquee, orb,
+      networks: ['facebook', 'x', 'instagram'],
+      nav: [
+        { label: 'About', href: '#about' },
+        { label: 'Programmes', href: '#programmes' },
+        { label: 'Awards', href: '#awards' },
+        { label: 'Gallery', href: '#gallery' },
+        { label: 'Contact', href: '#join' }
+      ],
+      facts: [
+        { v: '20–39', l: 'Age range of RAYLF leaders' },
+        { v: '4', l: 'Award editions since 2020' },
+        { v: '51st', l: 'Ooni of Ife, Royal Patron' }
+      ],
+      programmes: [
+        { n: '01', title: 'RAYLF Awards', body: 'Recognising young African leaders whose success stories are shaping the continent.', img: 'assets/photos/award-presentation-01.jpg', href: 'Awards.dc.html' },
+        { n: '02', title: 'G2G Millionaires', body: 'A programme equipping young founders to build enduring wealth and enterprise.', img: 'assets/photos/award-presentation-02.jpg', href: 'Programme.dc.html' },
+        { n: '03', title: 'Leadership Forum', body: 'Convening young leaders under royal patronage to exchange ideas and build networks.', img: 'assets/photos/speaker-portrait.jpg', href: 'Programmes.dc.html' }
+      ],
+      editions: [
+        { year: '2024', label: 'RAYLF Awards', tag: 'Latest', img: 'assets/photos/award-stage-01.jpg' },
+        { year: '2022', label: 'RAYLF Awards', tag: 'Edition III', img: 'assets/photos/award-presentation-03.jpg' },
+        { year: '2021', label: 'RAYLF Awards', tag: 'Edition II', img: 'assets/photos/award-presentation-02.jpg' },
+        { year: '2020', label: 'RAYLF Awards', tag: 'Edition I', img: 'assets/photos/award-presentation-01.jpg' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
