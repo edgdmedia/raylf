@@ -115,42 +115,44 @@
 }
 
 /* ============================================================
-   Base
+   Base — inside @layer base so Tailwind utilities can override
    ============================================================ */
 
-html {
-  -webkit-font-smoothing: antialiased;
-}
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
 
-body {
-  margin: 0;
-  background: var(--t-bg);
-  color: var(--t-fg);
-  font-family: var(--font-body);
-  overflow-x: clip;
-  transition:
-    background 0.4s var(--ease-standard),
-    color 0.4s var(--ease-standard);
-}
+  body {
+    margin: 0;
+    background: var(--t-bg);
+    color: var(--t-fg);
+    font-family: var(--font-body);
+    overflow-x: clip;
+    transition:
+      background 0.4s var(--ease-standard),
+      color 0.4s var(--ease-standard);
+  }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  margin: 0;
-  text-wrap: balance;
-}
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    margin: 0;
+    text-wrap: balance;
+  }
 
-p {
-  text-wrap: pretty;
-}
+  p {
+    text-wrap: pretty;
+  }
 
-a {
-  color: var(--gold-200);
-  text-decoration: none;
-  transition: color var(--dur-fast) var(--ease-standard);
-}
+  a {
+    color: var(--gold-200);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-standard);
+  }
 
-a:hover {
-  color: var(--gold-400);
+  a:hover {
+    color: var(--gold-400);
+  }
 }
 
 /* ============================================================

@@ -42,7 +42,7 @@ export function SiteFooter() {
             {importantLinks.map((l) => (
               <li key={l} className="flex items-center gap-2.5">
                 <i className="fa-solid fa-chevron-right text-[10px] text-[var(--gold-500)]" />
-                <a href="#" className="text-inherit hover:text-[var(--gold-200)]">
+                <a href="#" className="text-[rgba(255,255,255,.78)] transition-colors hover:text-[var(--gold-200)]">
                   {l}
                 </a>
               </li>
