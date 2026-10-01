@@ -1,1173 +1,476 @@
-import Image from "next/image";
-import { useTheme } from "../components/use-theme";
-import { SiteNav } from "../components/layout/site-nav";
-import { SiteFooter } from "../components/layout/site-footer";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { SiteNav } from "@/components/layout/site-nav";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { Button } from "@/components/ui/button";
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { SocialLinks } from "@/components/ui/social-links";
 import {
   facts,
   programmes,
-  navLinks,
-  editionData,
-} from "../data/home";
-import { Button } from "../components/ui/button";
-import { Eyebrow } from "../components/ui/eyebrow";
-import { PillButton } from "../components/ui/pill-button";
+  marqueeWords,
+  editions,
+  galleryTeaser,
+} from "@/data/home";
+
+export const metadata: Metadata = {
+  title: "RAYLF — A place for Africa's young leaders",
+  description:
+    "RAYLF recognises and convenes the most outstanding 20 to 39-year olds across the globe, shaping, transforming and anchoring the future of the continent.",
+};
+
+const marqueeRow = [...marqueeWords, ...marqueeWords, ...marqueeWords, ...marqueeWords];
 
 export default function Home() {
-  const { theme, toggleTheme, themeIcon } = useTheme();
-
-  const words = [
-    "Shaping",
-    "Transforming",
-    "Anchoring",
-    "Young Leaders",
-    "20 to 39",
-    "RAYLF Awards",
-    "G2G Millionaires",
-  ];
-  const marqueeRow = [...words, ...words, ...words, ...words];
-  const marqueeItems = marqueeRow.map((w, i) => (
-    <span
-      key={i}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: 48,
-        fontFamily: "'Poppins', system-ui, sans-serif",
-        fontWeight: 600,
-        fontSize: 28,
-        letterSpacing: "-.01em",
-        color: i % 2 ? "#fff" : "#f2b84b",
-        whiteSpace: "nowrap",
-      }}
-    >
-      {w}
-      <i
-        className="fa-solid fa-star"
-        style={{
-          fontSize: 12,
-          color: "rgba(255, 243, 168, .5)",
-        }}
-      />
-    </span>
-  ));
-
-  const orbStyle = {
-    position: "absolute" as const,
-    right: "8%" as const,
-    top: "18%" as const,
-    width: 360 as const,
-    height: 360 as const,
-    borderRadius: "50%" as const,
-    border: "1px solid rgba(255, 243, 168, .3)" as const,
-    boxShadow:
-      "inset 0 0 80px rgba(180, 73, 220, .35), 0 0 120px rgba(180, 73, 220, .3)" as const,
-    animation: "raylf-pulse 6s ease-in-out infinite" as const,
-    pointerEvents: "none" as const,
-  };
-
   return (
     <>
       <SiteNav />
-      <main className="relative">
-        {/* Hero section */}
-        <section
-          id="top"
-          data-screen-label="Hero"
-          style={{
-            position: "relative",
-            marginTop: "-84px",
-            minHeight: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end",
-            overflowX: "clip",
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "url(/photos/award-stage-01.jpg) center/cover",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background:
-                "linear-gradient(180deg, rgba(36,1,69,.55) 0%, rgba(36,1,69,.35) 35%, rgba(36,1,69,.92) 78%, #240145 100%)",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background:
-                "radial-gradient(60% 50% at 78% 30%, rgba(180, 73, 220, .45) 0%, rgba(111, 38, 207, 0) 70%)",
-            }}
-          />
-          {showGrid && (
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                backgroundImage: [
-                  "linear-gradient(rgba(255, 243, 168, .07) 1px, transparent 1px)",
-                  "linear-gradient(90deg, rgba(255, 243, 168, .07) 1px, transparent 1px)",
-                ],
-                backgroundSize: "88px 88px",
-                maskImage: "linear-gradient(180deg, transparent 0%, #000 40%, transparent 100%)",
-                WebkitMaskImage:
-                  "linear-gradient(180deg, transparent 0%, #000 40%, transparent 100%)",
-              }}
-            />
-          )}
-          <div
-            style={{
-              position: "absolute",
-              right: "8%",
-              top: "18%",
-              width: 360,
-              height: 360,
-              borderRadius: "50%",
-              border: "1px solid rgba(255, 243, 168, .3)",
-              boxShadow:
-                "inset 0 0 80px rgba(180, 73, 220, .35), 0 0 120px rgba(180, 73, 220, .3)",
-              animation: "raylf-pulse 6s ease-in-out infinite",
-              pointerEvents: "none",
-            }}
-          />
-          <div
-            style={{
-              position: "relative",
-              width: "100%",
-              maxWidth: 1320,
-              margin: "0 auto",
-              padding: "180px var(--container-pad) 64px",
-              boxSizing: "border-box",
-              display: "flex",
-              flexDirection: "column",
-              gap: 40,
-            }}
-          >
-            <div
-              style={{
-                display: "inline-flex",
-                alignSelf: "flex-start",
-                alignItems: "center",
-                gap: 10,
-                padding: "8px 16px 8px 10px",
-                borderRadius: "999px",
-                border: "1px solid rgba(255, 243, 168, .35)",
-                fontSize: "13px",
-                fontWeight: 600,
-                letterSpacing: ".14em",
-                textTransform: "uppercase",
-                color: "#fff3a8",
-              }}
-            >
-              <span
-                style={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: "50%",
-                  background: "#f2b84b",
-                  boxShadow: "0 0 12px #f2b84b",
-                }}
-              />
-              Royal African Young Leadership Forum
-            </div>
-            <h1
-              style={{
-                margin: 0,
-                color: "#fff",
-                fontFamily: "'Poppins', system-ui, sans-serif",
-                fontWeight: 700,
-                fontSize: "clamp(52px, 10vw, 148px)",
-                lineHeight: ".92",
-                letterSpacing: "-.04em",
-                textWrap: "balance",
-                maxWidth: 1200,
-              }}
-            >
-              A place for Africa{"'{'}{'}''}{''}
-              <span
-                style={{
-                  background: "linear-gradient(100deg, #c48a1f 0%, #f2b84b 48%, #d29b29 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                }}
-              >
-                Africa’s young leaders.
-              </span>
-            </h1>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
-                gap: 32,
-                alignItems: "end",
-                borderTop: "1px solid rgba(255, 255, 255, .16)",
-                paddingTop: 32,
-              }}
-            >
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: 19,
-                  lineHeight: 1.6,
-                  color: "rgba(255, 255, 255, .82)",
-                  maxWidth: 520,
-                  textWrap: "pretty",
-                }}
-              >
-                RAYLF recognises and convenes the most outstanding 20 to 39-year olds across the globe, shaping, transforming and anchoring the future of the continent.
-              </p>
-              <div
-                style={{
-                  display: "flex",
-                  gap: 14,
-                  flexWrap: "wrap",
-                  justifyContent: "flex-end",
-                }}
-              >
-                <Button
-                  variant="gold"
-                  size="lg"
-                  iconRight="fa-solid fa-arrow-right"
-                  href="/awards"
-                >
-                  RAYLF Awards
-                </Button>
-                <Button
-                  variant="outline-light"
-                  size="lg"
-                  href="/about"
-                >
-                  About RAYLF
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* Marquee */}
+      {/* HERO */}
+      <section className="relative flex min-h-screen -mt-[84px] flex-col justify-end">
         <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url(/photos/award-stage-01.jpg)" }}
+        />
+        <div
+          className="absolute inset-0"
           style={{
-            borderTop: "1px solid rgba(255, 243, 168, .16)",
-            borderBottom: "1px solid rgba(255, 243, 168, .16)",
-            background: "var(--violet-900)",
-            padding: "22px 0",
-            overflow: "hidden",
+            background:
+              "linear-gradient(180deg, rgba(36,1,69,.55) 0%, rgba(36,1,69,.35) 35%, rgba(36,1,69,.92) 78%, #240145 100%)",
           }}
-        >
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(60% 50% at 78% 30%, rgba(180,73,220,.45) 0%, rgba(111,38,207,0) 70%)",
+          }}
+        />
+        <div className="grid-overlay" />
+
+        {/* Pulsing ring */}
+        <div
+          className="pulse-ring pointer-events-none absolute rounded-full"
+          style={{
+            right: "8%",
+            top: "18%",
+            width: 360,
+            height: 360,
+            border: "1px solid rgba(255,243,168,.3)",
+            boxShadow:
+              "inset 0 0 80px rgba(180,73,220,.35), 0 0 120px rgba(180,73,220,.3)",
+          }}
+        />
+
+        <div className="container-raylf relative flex flex-col gap-10 pb-16 pt-[180px]">
           <div
-            style={{
-              display: "flex",
-              width: "max-content",
-              animation: "raylf-marquee 40s linear infinite",
-            }}
+            className="inline-flex w-fit items-center gap-2.5 rounded-[var(--radius-pill)] px-4 py-2 pl-2.5 text-[13px] font-semibold uppercase tracking-[0.14em] text-[#FFF3A8]"
+            style={{ border: "1px solid rgba(255,243,168,.35)" }}
           >
-            {marqueeItems}
+            <span
+              className="h-2 w-2 rounded-full"
+              style={{ background: "#F2B84B", boxShadow: "0 0 12px #F2B84B" }}
+            />
+            Royal African Young Leadership Forum
+          </div>
+
+          <h1
+            className="max-w-[1200px] text-[clamp(52px,10vw,148px)] leading-[.92] tracking-[-0.04em] text-white"
+            style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
+          >
+            A place for Africa&rsquo;s{" "}
+            <span className="gold-foil">young leaders.</span>
+          </h1>
+
+          <div
+            className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] items-end gap-8 border-t border-white/15 pt-8"
+          >
+            <p className="m-0 max-w-[520px] text-[19px] leading-[1.6] text-white/80">
+              RAYLF recognises and convenes the most outstanding 20 to 39-year
+              olds across the globe, shaping, transforming and anchoring the
+              future of the continent.
+            </p>
+            <div className="flex flex-wrap justify-end gap-3.5">
+              <Button variant="gold" size="lg" href="/awards" iconRight="fa-solid fa-arrow-right">
+                RAYLF Awards
+              </Button>
+              <Button variant="outline-light" size="lg" href="/about">
+                About RAYLF
+              </Button>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* About section */}
-        <section
-          id="about"
-          data-screen-label="About"
-          style={{
-            position: "relative",
-            padding: "140px var(--container-pad)",
-          }}
-        >
-          <div
-            style={{
-              maxWidth: 1320,
-              margin: "0 auto",
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 440px), 1fr))",
-              gap: 72,
-              alignItems: "center",
-            }}
-          >
-            <div
+      {/* MARQUEE */}
+      <div
+        className="overflow-hidden bg-[var(--violet-900)] py-[22px]"
+        style={{
+          borderTop: "1px solid rgba(255,243,168,.16)",
+          borderBottom: "1px solid rgba(255,243,168,.16)",
+        }}
+      >
+        <div className="marquee-track">
+          {marqueeRow.map((w, i) => (
+            <span
+              key={i}
+              className="flex items-center gap-12 whitespace-nowrap text-[28px] tracking-[-0.01em]"
               style={{
-                position: "relative",
+                fontFamily: "var(--font-display)",
+                fontWeight: 600,
+                color: i % 2 ? "#fff" : "#F2B84B",
               }}
             >
-              <div
-                style={{
-                  position: "absolute",
-                  inset: "24px -24px -24px 24px",
-                  border: "2px solid var(--gold-500)",
-                  borderRadius: "24px",
-                }}
+              {w}
+              <i
+                className="fa-solid fa-star text-xs"
+                style={{ color: "rgba(255,243,168,.5)" }}
               />
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* ABOUT */}
+      <section className="section-pad">
+        <div className="container-raylf grid grid-cols-[repeat(auto-fit,minmax(min(100%,440px),1fr))] items-center gap-[72px]">
+          <div className="relative">
+            <div
+              className="absolute rounded-[var(--radius-lg)]"
+              style={{ inset: "24px -24px -24px 24px", border: "2px solid var(--gold-500)" }}
+            />
+            <div
+              className="relative aspect-[4/5] rounded-[var(--radius-lg)] bg-cover bg-center"
+              style={{
+                backgroundImage: "url(/photos/his-majesty-throne.jpg)",
+                boxShadow: "var(--t-shadow)",
+              }}
+            />
+            <div
+              className="absolute -left-3 bottom-10 max-w-[240px] rounded-[var(--radius-md)] bg-[var(--violet-700)] p-[22px]"
+              style={{
+                border: "1px solid rgba(255,243,168,.25)",
+                boxShadow: "0 20px 50px rgba(10,0,25,.5)",
+              }}
+            >
+              <div className="mb-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-[#FFF3A8]">
+                Royal Patron
+              </div>
               <div
-                style={{
-                  position: "relative",
-                  aspectRatio: "4 / 5",
-                  borderRadius: "24px",
-                  background: "url(/photos/his-majesty-throne.jpg) center/cover",
-                  boxShadow: "0 30px 80px rgba(10, 0, 25, .6)",
-                }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  left: "-12",
-                  bottom: 40,
-                  padding: "18px 22px",
-                  borderRadius: "16px",
-                  background: "var(--violet-700)",
-                  border: "1px solid rgba(255, 243, 168, .25)",
-                  boxShadow: "0 20px 50px rgba(10, 0, 25, .5)",
-                  maxWidth: 240,
-                }}
+                className="text-base font-semibold leading-[1.35] text-white"
+                style={{ fontFamily: "var(--font-display)" }}
               >
-                <div
-                  style={{
-                    fontSize: 11,
-                    fontWeight: 700,
-                    letterSpacing: ".18em",
-                    textTransform: "uppercase",
-                    color: "#fff3a8",
-                    marginBottom: 6,
-                  }}
-                >
-                  Royal Patron
-                </div>
-                <div
-                  style={{
-                    fontFamily: "'Poppins', system-ui, sans-serif",
-                    fontWeight: 600,
-                    fontSize: 16,
-                    lineHeight: 1.35,
-                  }}
-                >
-                  His Imperial Majesty Oba Adeyeye Enitan Ogunwusi, Ojaja II
-                </div>
+                His Imperial Majesty Oba Adeyeye Enitan Ogunwusi, Ojaja II
               </div>
             </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 28,
-              }}
+          </div>
+
+          <div className="flex flex-col gap-7">
+            <Eyebrow tone="gold">About RAYLF</Eyebrow>
+            <h2
+              className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+              style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
             >
-              <Eyebrow tone="gold">About RAYLF</Eyebrow>
-              <h2
-                style={{
-                  margin: 0,
-                  color: "var(--t-fg)",
-                  fontFamily: "'Poppins', system-ui, sans-serif",
-                  fontWeight: 700,
-                  fontSize: "clamp(38px, 5vw, 68px)",
-                  lineHeight: 1,
-                  letterSpacing: "-.03em",
-                  textWrap: "balance",
-                }}
-              >
-                The spirit, soul and memory of Africa.
-              </h2>
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: 18,
-                  lineHeight: 1.7,
-                  color: "var(--t-muted)",
-                  textWrap: "pretty",
-                }}
-              >
-                RAYLF is a programme of the Royal African Foundation of His Imperial Majesty, the 51st Ooni of Ife. It exists to redefine centuries of the rich resilient spirit of African Kingdoms, which embodies many defining principles of its identity.
-              </p>
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: 18,
-                  lineHeight: 1.7,
-                  color: "var(--t-muted)",
-                  textWrap: "pretty",
-                }}
-              >
-                Through the RAYLF Awards and programmes such as G2G Millionaires, we celebrate the success stories of young leaders and connect them to a lineage of royal patronage.
-              </p>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-                  gap: "1px",
-                  background: "var(--t-line)",
-                  borderRadius: "24px",
-                  overflow: "hidden",
-                  marginTop: 12,
-                }}
-              >
-                {facts.map((fact, i) => (
+              The spirit, soul and memory of Africa.
+            </h2>
+            <p className="m-0 text-lg leading-[1.7]" style={{ color: "var(--t-muted)" }}>
+              RAYLF is a programme of the Royal African Foundation of His
+              Imperial Majesty, the 51st Ooni of Ife. It exists to redefine
+              centuries of the rich resilient spirit of African Kingdoms, which
+              embodies many defining principles of its identity.
+            </p>
+            <p className="m-0 text-lg leading-[1.7]" style={{ color: "var(--t-muted)" }}>
+              Through the RAYLF Awards and programmes such as G2G Millionaires,
+              we celebrate the success stories of young leaders and connect them
+              to a lineage of royal patronage.
+            </p>
+            <div
+              className="mt-3 grid grid-cols-3 gap-px overflow-hidden rounded-[var(--radius-md)]"
+              style={{ background: "var(--t-line)" }}
+            >
+              {facts.map((f) => (
+                <div
+                  key={f.l}
+                  className="flex flex-col gap-1.5 p-[22px]"
+                  style={{ background: "var(--t-bg)" }}
+                >
                   <div
-                    key={i}
+                    className="text-[34px] tracking-[-0.03em]"
                     style={{
-                      padding: "22px 20px",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: 6,
+                      fontFamily: "var(--font-display)",
+                      fontWeight: 700,
+                      color: "var(--t-gold)",
                     }}
                   >
-                    <div
-                      style={{
-                        fontFamily: "'Poppins', system-ui, sans-serif",
-                        fontWeight: 700,
-                        fontSize: 34,
-                        letterSpacing: "-.03em",
-                        color: "var(--t-gold)",
-                      }}
-                    >
-                      {fact.v}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: 13,
-                        lineHeight: 1.4,
-                        color: "var(--t-muted)",
-                      }}
-                    >
-                      {fact.l}
-                    </div>
+                    {f.v}
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Programmes section */}
-        <section
-          id="programmes"
-          data-screen-label="Programmes"
-          style={{
-            position: "relative",
-            padding: "120px var(--container-pad)",
-            background: "var(--t-sec)",
-          }}
-        >
-          <div
-            style={{
-              maxWidth: 1320,
-              margin: "0 auto",
-              display: "flex",
-              flexDirection: "column",
-              gap: 56,
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "flex-end",
-                gap: 32,
-                flexWrap: "wrap",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 20,
-                  maxWidth: 720,
-                }}
-              >
-                <Eyebrow tone="gold">What We Do</Eyebrow>
-                <h2
-                  style={{
-                    margin: 0,
-                    color: "var(--t-fg)",
-                    fontFamily: "'Poppins', system-ui, sans-serif",
-                    fontWeight: 700,
-                    fontSize: "clamp(38px, 5vw, 68px)",
-                    lineHeight: 1,
-                    letterSpacing: "-.03em",
-                  }}
-                >
-                  Find your place.
-                </h2>
-                <p
-                  style={{
-                    margin: 0,
-                    maxWidth: 400,
-                    fontSize: 17,
-                    lineHeight: 1.65,
-                    color: "var(--t-muted)",
-                  }}
-                >
-                  Three ways RAYLF recognises, equips and connects young African leaders.
-                </p>
-              </div>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
-                  gap: 20,
-                }}
-              >
-                {programmes.map((prog, i) => (
-                  <a
-                    key={i}
-                    href={prog.href}
-                    style={{
-                      position: "relative",
-                      display: "flex",
-                      flexDirection: "column",
-                      minHeight: 520,
-                      borderRadius: "24px",
-                      overflow: "hidden",
-                      color: "#fff",
-                      border: "1px solid rgba(255, 243, 168, .14)",
-                      transition: "transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s",
-                      styleHover: {
-                        transform: "translateY(-6px)",
-                        borderColor: "rgba(242, 184, 75, .7)",
-                        color: "#fff",
-                      },
-                    }}
-                  >
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        backgroundImage: `url(${prog.img})`,
-                      }}
-                    />
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        background:
-                          "linear-gradient(180deg, rgba(36, 1, 69, .2) 0%, rgba(36, 1, 69, .55) 45%, rgba(36, 1, 69, .96) 100%)",
-                      }}
-                    />
-                    <div
-                      style={{
-                        position: "relative",
-                        padding: "24px",
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <span
-                        style={{
-                          fontFamily: "'Poppins', system-ui, sans-serif",
-                          fontWeight: 600,
-                          fontSize: 14,
-                          letterSpacing: ".1em",
-                          color: "#fff3a8",
-                        }}
-                      >
-                        {prog.n}
-                      </span>
-                      <span
-                        style={{
-                          width: 44,
-                          height: 44,
-                          borderRadius: "50%",
-                          border: "1px solid rgba(255, 255, 255, .5)",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <i
-                          className="fa-solid fa-arrow-right"
-                          style={{
-                            transform: "rotate(-45deg)",
-                          }}
-                        />
-                      </span>
-                    </div>
-                    <div
-                      style={{
-                        position: "relative",
-                        marginTop: "auto",
-                        padding: "28px",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 12,
-                      }}
-                    >
-                      <h3
-                        style={{
-                          margin: 0,
-                          color: "#fff",
-                          fontFamily: "'Poppins', system-ui, sans-serif",
-                          fontWeight: 700,
-                          fontSize: 32,
-                          letterSpacing: "-.02em",
-                          lineHeight: 1.05,
-                        }}
-                      >
-                        {prog.title}
-                      </h3>
-                      <p
-                        style={{
-                          margin: 0,
-                          fontSize: 15,
-                          lineHeight: 1.6,
-                          color: "rgba(255, 255, 255, .8)",
-                        }}
-                      >
-                        {prog.body}
-                      </p>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Quote section */}
-        <section
-          data-screen-label="Quote"
-          style={{
-            position: "relative",
-            padding: "160px var(--container-pad)",
-            textAlign: "center",
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "url(/photos/royal-audience.jpg) center/cover",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "rgba(36, 1, 69, .88)",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: "50%",
-              width: 720,
-              height: 720,
-              transform: "translate(-50%, -50%)",
-              borderRadius: "50%",
-              border: "1px solid rgba(255, 243, 168, .14)",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: "50%",
-              width: 1040,
-              height: 1040,
-              transform: "translate(-50%, -50%)",
-              borderRadius: "50%",
-              border: "1px solid rgba(255, 243, 168, .08)",
-            }}
-          />
-          <div
-            style={{
-              position: "relative",
-              maxWidth: 1000,
-              margin: "0 auto",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 32,
-            }}
-          >
-            <i
-              className="fa-solid fa-quote-left"
-              style={{
-                fontSize: 40,
-                color: "#f2b84b",
-              }}
-            />
-            <blockquote
-              style={{
-                margin: 0,
-                fontFamily: "'Poppins', system-ui, sans-serif",
-                fontStyle: "italic",
-                fontWeight: 500,
-                fontSize: "clamp(28px, 3.6vw, 48px)",
-                lineHeight: 1.25,
-                letterSpacing: "-.015em",
-                textWrap: "balance",
-              }}
-            >
-              Young Africans are the spirit, soul and memory of Africa.
-            </blockquote>
-            <div
-              style={{
-                width: 70,
-                height: 3,
-                borderRadius: 3,
-                background: "linear-gradient(100deg, #c48a1f 0%, #f2b84b 48%, #d29b29 100%)",
-              }}
-            />
-            <div
-              style={{
-                fontSize: 14,
-                fontWeight: 700,
-                letterSpacing: ".16em",
-                textTransform: "uppercase",
-                color: "#fff3a8",
-              }}
-            >
-              His Imperial Majesty (H.I.M) Ooni of Ife
-            </div>
-          </div>
-        </section>
-
-        {/* Awards section */}
-        <section
-          id="awards"
-          data-screen-label="Awards"
-          style={{
-            padding: "140px var(--container-pad)",
-          }}
-        >
-          <div
-            style={{
-              maxWidth: 1320,
-              margin: "0 auto",
-              display: "flex",
-              flexDirection: "column",
-              gap: 64,
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "flex-end",
-                gap: 32,
-                flexWrap: "wrap",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 20,
-                  maxWidth: 760,
-                }}
-              >
-                <Eyebrow tone="gold">RAYLF Awards</Eyebrow>
-                <h2
-                  style={{
-                    margin: 0,
-                    color: "var(--t-fg)",
-                    fontFamily: "'Poppins', system-ui, sans-serif",
-                    fontWeight: 700,
-                    fontSize: "clamp(38px, 5vw, 68px)",
-                    lineHeight: 1,
-                    letterSpacing: "-.03em",
-                    textWrap: "balance",
-                  }}
-                >
-                  Every edition, a new generation.
-                </h2>
-                <PillButton
-                  variant="outline-light"
-                  size="lg"
-                  href="/awards#awardees"
-                  iconRight="fa-solid fa-arrow-right"
-                >
-                  Awardees
-                </PillButton>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  gap: 8,
-                  flexWrap: "wrap",
-                }}
-              >
-                {editionData.map((ed, i) => (
-                  <button
-                    key={ed.year}
-                    style={{
-                      padding: "12px 24px",
-                      borderRadius: "999px",
-                      border: `1px solid ${ed.year === "2024" ? "#fff3a8" : "rgba(255, 255, 255, .35)"}`,
-                      background: ed.year === "2024" ? "#fff3a8" : "transparent",
-                      color: ed.year === "2024" ? "#240145" : "#fff",
-                      fontFamily: "'Poppins', system-ui, sans-serif",
-                      fontWeight: 600,
-                      fontSize: 16,
-                      cursor: "pointer",
-                      transition: "all .25s",
-                    }}
-                  >
-                    {ed.year}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))",
-                gap: 20,
-              }}
-            >
-              {editionData.map((ed, i) => (
-                <div
-                  key={i}
-                  style={{
-                    position: "relative",
-                    borderRadius: "24px",
-                    overflow: "hidden",
-                    aspectRatio: "3 / 4",
-                    border: "1px solid rgba(255, 243, 168, .14)",
-                  }}
-                >
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      backgroundImage: `url(${ed.img})`,
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "linear-gradient(180deg, rgba(36, 1, 69, .1) 0%, rgba(36, 1, 69, .88) 100%)",
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      left: 0,
-                      right: 0,
-                      top: 0,
-                      padding: "22px",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <span
-                      style={{
-                        padding: "6px 12px",
-                        borderRadius: "999px",
-                        background: "rgba(36, 1, 69, .7)",
-                        border: "1px solid rgba(255, 243, 168, .3)",
-                        fontSize: 12,
-                        fontWeight: 700,
-                        letterSpacing: ".14em",
-                        textTransform: "uppercase",
-                        color: "#fff3a8",
-                      }}
-                    >
-                      {ed.tag}
-                    </span>
-                    <div
-                      style={{
-                        fontFamily: "'Poppins', system-ui, sans-serif",
-                        fontWeight: 700,
-                        fontSize: 64,
-                        lineHeight: 1,
-                        letterSpacing: "-.04em",
-                      }}
-                    >
-                      {ed.year}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: 14,
-                        color: "rgba(255, 255, 255, .8)",
-                      }}
-                    >
-                      {ed.label}
-                    </div>
+                  <div className="text-[13px] leading-[1.4]" style={{ color: "var(--t-muted)" }}>
+                    {f.l}
                   </div>
                 </div>
               ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Gallery teaser */}
-        <section
-          id="gallery"
-          data-screen-label="Gallery"
-          style={{
-            padding: "0 var(--container-pad) 140px",
-          }}
-        >
-          <div
-            style={{
-              maxWidth: 1320,
-              margin: "0 auto",
-              display: "grid",
-              gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-              gridAutoRows: 220,
-              gap: 16,
-            }}
-          >
-            <div
-              style={{
-                gridColumn: "span 2",
-                gridRow: "span 2",
-                borderRadius: "24px",
-                background: "url(/photos/award-presentation-04.jpg) center/cover",
-              }}
-            />
-            <div
-              style={{
-                borderRadius: "24px",
-                background: "url(/photos/speaker-portrait.jpg) center/cover",
-              }}
-            />
-            <div
-              style={{
-                borderRadius: "24px",
-                background: "url(/photos/award-greeting.jpg) center/cover",
-              }}
-            />
-            <div
-              style={{
-                borderRadius: "24px",
-                background: "radial-gradient(110% 70% at 50% 70%, #b449dc 0%, #6f26cf 28%, #5002b9 55%, #3f028e 100%)",
-                padding: "32px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                boxSizing: "border-box",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 12,
-                  fontWeight: 700,
-                  letterSpacing: ".18em",
-                  textTransform: "uppercase",
-                  color: "#fff3a8",
-                }}
+      {/* PROGRAMMES */}
+      <section className="section-pad" style={{ background: "var(--t-sec)" }}>
+        <div className="container-raylf flex flex-col gap-14">
+          <div className="flex flex-wrap items-end justify-between gap-8">
+            <div className="flex max-w-[720px] flex-col gap-5">
+              <Eyebrow tone="gold">What We Do</Eyebrow>
+              <h2
+                className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+                style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
               >
-                Follow the journey
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-end",
-                  gap: 16,
-                  flexWrap: "wrap",
-                }}
+                Find your place.
+              </h2>
+            </div>
+            <p className="m-0 max-w-[400px] text-[17px] leading-[1.65]" style={{ color: "var(--t-muted)" }}>
+              Three ways RAYLF recognises, equips and connects young African
+              leaders.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-5">
+            {programmes.map((p) => (
+              <Link
+                key={p.n}
+                href={p.href}
+                className="card-lift programme-card relative flex min-h-[520px] flex-col overflow-hidden rounded-[var(--radius-lg)] text-white"
+                style={{ border: "1px solid rgba(255,243,168,.14)" }}
               >
                 <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${p.img})` }}
+                />
+                <div
+                  className="absolute inset-0"
                   style={{
-                    fontFamily: "'Poppins', system-ui, sans-serif",
-                    fontWeight: 700,
-                    fontSize: 32,
-                    letterSpacing: "-.02em",
-                  }}
-                >
-                  @royalafricanlyf
-                </div>
-                <i
-                  className="fa-brands fa-instagram"
-                  style={{
-                    width: 38,
-                    height: 38,
-                    borderRadius: "50%",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: 15,
-                    background: "rgba(255, 255, 255, .08)",
-                    color: "#fff",
+                    background:
+                      "linear-gradient(180deg, rgba(36,1,69,.2) 0%, rgba(36,1,69,.55) 45%, rgba(36,1,69,.96) 100%)",
                   }}
                 />
-                <span>royalafricanlyf.org</span>
-              </div>
+                <div className="relative flex items-start justify-between p-6">
+                  <span
+                    className="text-sm font-semibold tracking-[0.1em] text-[#FFF3A8]"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {p.n}
+                  </span>
+                  <span
+                    className="flex h-11 w-11 items-center justify-center rounded-full"
+                    style={{ border: "1px solid rgba(255,255,255,.5)" }}
+                  >
+                    <i className="fa-solid fa-arrow-right -rotate-45" />
+                  </span>
+                </div>
+                <div className="relative mt-auto flex flex-col gap-3 p-7">
+                  <h3
+                    className="text-[32px] leading-[1.05] tracking-[-0.02em] text-white"
+                    style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
+                  >
+                    {p.title}
+                  </h3>
+                  <p className="m-0 text-[15px] leading-[1.6] text-white/80">{p.body}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* QUOTE */}
+      <section className="relative py-[160px] text-center">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url(/photos/royal-audience.jpg)" }}
+        />
+        <div className="absolute inset-0" style={{ background: "rgba(36,1,69,.88)" }} />
+        <div
+          className="absolute left-1/2 top-1/2 h-[720px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+          style={{ border: "1px solid rgba(255,243,168,.14)" }}
+        />
+        <div
+          className="absolute left-1/2 top-1/2 h-[1040px] w-[1040px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+          style={{ border: "1px solid rgba(255,243,168,.08)" }}
+        />
+        <div className="relative mx-auto flex max-w-[1000px] flex-col items-center gap-8 px-[var(--container-pad)]">
+          <i className="fa-solid fa-quote-left text-[40px] text-[#F2B84B]" />
+          <blockquote
+            className="m-0 italic text-[clamp(28px,3.6vw,48px)] leading-[1.25] tracking-[-0.015em] text-white"
+            style={{ fontFamily: "var(--font-display)", fontWeight: 500 }}
+          >
+            Young Africans are the spirit, soul and memory of Africa.
+          </blockquote>
+          <div className="gold-rule" />
+          <div className="text-sm font-bold uppercase tracking-[0.16em] text-[#FFF3A8]">
+            His Imperial Majesty (H.I.M) Ooni of Ife
+          </div>
+        </div>
+      </section>
+
+      {/* AWARDS */}
+      <section className="section-pad">
+        <div className="container-raylf flex flex-col gap-16">
+          <div className="flex flex-wrap items-end justify-between gap-8">
+            <div className="flex max-w-[760px] flex-col gap-5">
+              <Eyebrow tone="gold">RAYLF Awards</Eyebrow>
+              <h2
+                className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+                style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
+              >
+                Every edition, a new generation.
+              </h2>
             </div>
+            <Button variant="outline" href="/awards#awardees" iconRight="fa-solid fa-arrow-right">
+              Awardees
+            </Button>
           </div>
-        </section>
 
-        {/* Global Mission */}
-        <section
-          data-screen-label="Global Mission"
-          style={{
-            position: "relative",
-            background: "#240145",
-            padding: "140px var(--container-pad)",
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "url(/brand/africa-world-map.jpg) center/cover",
-              opacity: .5,
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background:
-                "linear-gradient(90deg, #240145 0%, rgba(36, 1, 69, .75) 55%, rgba(36, 1, 69, .35) 100%)",
-            }}
-          />
-          <div
-            style={{
-              maxWidth: 1320,
-              margin: "0 auto",
-              display: "flex",
-              flexDirection: "column",
-              gap: 24,
-            }}
-          >
-            <Eyebrow tone="light">Global Mission</Eyebrow>
-            <h2
-              style={{
-                margin: 0,
-                color: "#fff",
-                fontFamily: "'Poppins', system-ui, sans-serif",
-                fontWeight: 700,
-                fontSize: "clamp(38px, 5vw, 68px)",
-                lineHeight: 1,
-                letterSpacing: "-.03em",
-                textWrap: "balance",
-                maxWidth: 760,
-              }}
-            >
-              From Ile-Ife to the world.
-            </h2>
-            <p
-              style={{
-                margin: 0,
-                maxWidth: 560,
-                fontSize: 18,
-                lineHeight: 1.7,
-                color: "rgba(255, 255, 255, .8)",
-                textWrap: "pretty",
-              }}
-            >
-              Africa’s economic prosperity, the blessings of its natural resources and the valuable inheritance of its creative culture, carried forward by young leaders across every continent.
-            </p>
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-5">
+            {editions.map((e) => (
+              <Link
+                key={e.year}
+                href="/awards"
+                className="card-lift relative aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)]"
+                style={{ border: "1px solid rgba(255,243,168,.14)" }}
+              >
+                <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${e.img})` }}
+                />
+                <div className="absolute inset-0" style={{ background: "var(--overlay-scrim)" }} />
+                <div className="absolute inset-x-0 top-0 flex items-center justify-between p-[22px]">
+                  <span
+                    className="rounded-[var(--radius-pill)] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-[#FFF3A8]"
+                    style={{
+                      background: "rgba(36,1,69,.7)",
+                      border: "1px solid rgba(255,243,168,.3)",
+                    }}
+                  >
+                    {e.tag}
+                  </span>
+                </div>
+                <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1.5 p-6">
+                  <div
+                    className="text-[64px] leading-none tracking-[-0.04em] text-white"
+                    style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
+                  >
+                    {e.year}
+                  </div>
+                  <div className="text-sm text-white/80">{e.label}</div>
+                </div>
+              </Link>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Closing CTA */}
-        <section
-          id="join"
-          data-screen-label="Join"
-          style={{
-            padding: "120px var(--container-pad)",
-          }}
-        >
+      {/* GALLERY TEASER */}
+      <section className="pb-[140px]">
+        <div className="container-raylf grid grid-cols-2 gap-4 lg:grid-cols-4 lg:[grid-auto-rows:220px]">
           <div
-            style={{
-              position: "relative",
-              maxWidth: 1320,
-              margin: "0 auto",
-              borderRadius: 32,
-              overflow: "hidden",
-              background:
-                "linear-gradient(180deg, #4403a7 0%, #5002b9 40%, #6f26cf 75%, #b449dc)",
-              padding: "96px 48px",
-              boxSizing: "border-box",
-              textAlign: "center",
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                left: "50%",
-                bottom: -360,
-                width: 720,
-                height: 720,
-                transform: "translateX(-50%)",
-                borderRadius: "50%",
-                background:
-                  "radial-gradient(circle, rgba(242, 184, 75, .45) 0%, rgba(242, 184, 75, 0) 65%)",
-            }}
+            className="col-span-2 row-span-2 rounded-[var(--radius-lg)] bg-cover bg-center"
+            style={{ backgroundImage: `url(${galleryTeaser[0]})`, minHeight: 220 }}
           />
           <div
-            style={{
-              position: "relative",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 28,
-            }}
+            className="rounded-[var(--radius-lg)] bg-cover bg-center"
+            style={{ backgroundImage: `url(${galleryTeaser[1]})`, minHeight: 220 }}
+          />
+          <div
+            className="rounded-[var(--radius-lg)] bg-cover bg-center"
+            style={{ backgroundImage: `url(${galleryTeaser[2]})`, minHeight: 220 }}
+          />
+          <div
+            className="col-span-2 flex flex-col justify-between rounded-[var(--radius-lg)] p-8 text-white"
+            style={{ background: "var(--gradient-royal)", minHeight: 220 }}
           >
-            <h2
-              style={{
-                margin: 0,
-                color: "#fff",
-                fontFamily: "'Poppins', system-ui, sans-serif",
-                fontWeight: 700,
-                fontSize: "clamp(40px, 6vw, 88px)",
-                lineHeight: ".95",
-                letterSpacing: "-.04em",
-                textWrap: "balance",
-                maxWidth: 900,
-              }}
-            >
-              There’s a place for you.
-            </h2>
-            <p
-              style={{
-                margin: 0,
-                maxWidth: 560,
-                fontSize: 18,
-                lineHeight: 1.65,
-                color: "rgba(255, 255, 255, .88)",
-              }}
-            >
-              Discover the programmes through which RAYLF recognises, equips and connects young African leaders.
-            </p>
-            <div
-              style={{
-                display: "flex",
-                gap: 14,
-                flexWrap: "wrap",
-                justifyContent: "center",
-              }}
-            >
-              <PillButton
-                variant="gold"
-                size="lg"
-                href="/programmes"
-                iconRight="fa-solid fa-arrow-right"
+            <div className="text-xs font-bold uppercase tracking-[0.18em] text-[#FFF3A8]">
+              Follow the journey
+            </div>
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div
+                className="text-[32px] tracking-[-0.02em]"
+                style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
               >
-                Our Programmes
-              </PillButton>
-              <PillButton
-                variant="outline-light"
-                size="lg"
-                href="/about"
-              >
-                About RAYLF
-              </PillButton>
+                @royalafricanlyf
+              </div>
+              <SocialLinks tone="dark" />
             </div>
           </div>
         </div>
-        </section>
+      </section>
 
-        {/* Footer */}
-        <SiteFooter />
-      </main>
+      {/* GLOBAL MISSION — always dark */}
+      <section className="relative py-[140px]" style={{ background: "#240145" }}>
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-50"
+          style={{ backgroundImage: "url(/brand/africa-world-map.jpg)" }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg, #240145 0%, rgba(36,1,69,.75) 55%, rgba(36,1,69,.35) 100%)",
+          }}
+        />
+        <div className="container-raylf relative flex flex-col gap-6">
+          <Eyebrow tone="light">Global Mission</Eyebrow>
+          <h2
+            className="max-w-[760px] text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em] text-white"
+            style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
+          >
+            From Ile-Ife to the world.
+          </h2>
+          <p className="m-0 max-w-[560px] text-lg leading-[1.7] text-white/80">
+            Africa&rsquo;s economic prosperity, the blessings of its natural
+            resources and the valuable inheritance of its creative culture,
+            carried forward by young leaders across every continent.
+          </p>
+        </div>
+      </section>
+
+      {/* CLOSING CTA */}
+      <section className="py-[120px]">
+        <div className="container-raylf">
+          <div
+            className="relative overflow-hidden rounded-[32px] bg-[var(--gradient-violet-sky)] px-8 py-[96px] text-center text-white md:px-12"
+          >
+            <div
+              className="pointer-events-none absolute left-1/2 h-[720px] w-[720px] -translate-x-1/2 rounded-full"
+              style={{
+                bottom: -360,
+                background:
+                  "radial-gradient(circle, rgba(242,184,75,.45) 0%, rgba(242,184,75,0) 65%)",
+              }}
+            />
+            <div className="relative mx-auto flex max-w-[940px] flex-col items-center gap-7">
+              <h2
+                className="max-w-[900px] text-[clamp(40px,6vw,88px)] leading-[.95] tracking-[-0.04em] text-white"
+                style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
+              >
+                There&rsquo;s a place for you.
+              </h2>
+              <p className="m-0 max-w-[560px] text-lg leading-[1.65] text-white/90">
+                Discover the programmes through which RAYLF recognises, equips
+                and connects young African leaders.
+              </p>
+              <div className="flex flex-wrap justify-center gap-3.5">
+                <Button variant="gold" size="lg" href="/programmes" iconRight="fa-solid fa-arrow-right">
+                  Our Programmes
+                </Button>
+                <Button variant="outline-light" size="lg" href="/about">
+                  About RAYLF
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter />
     </>
   );
 }

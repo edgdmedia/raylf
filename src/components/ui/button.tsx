@@ -1,127 +1,70 @@
-"use client";
+import Link from "next/link";
+import React from "react";
 
-import * as React from "react";
+type Variant = "primary" | "gold" | "outline" | "outline-light" | "ghost";
+type Size = "sm" | "md" | "lg";
+
+const sizeClasses: Record<Size, string> = {
+  sm: "py-2 px-[18px] text-[13px]",
+  md: "py-[13px] px-7 text-[15px]",
+  lg: "py-4 px-9 text-base",
+};
+
+const variantClasses: Record<Variant, string> = {
+  primary:
+    "bg-[var(--brand-primary)] text-white border-2 border-[var(--brand-primary)] hover:bg-[var(--gold-600)] hover:border-[var(--gold-600)] hover:text-[var(--violet-950)]",
+  gold: "btn-gold bg-[var(--gradient-gold)] text-[var(--violet-950)] border-2 border-transparent",
+  outline:
+    "bg-transparent text-[var(--brand-primary)] border-2 border-[var(--brand-primary)] hover:bg-[var(--brand-primary)] hover:text-white",
+  "outline-light":
+    "btn-outline-light bg-transparent text-white border-2 border-white",
+  ghost:
+    "bg-transparent text-[var(--brand-primary)] border-2 border-transparent hover:text-[var(--gold-700)]",
+};
+
+interface ButtonProps {
+  variant?: Variant;
+  size?: Size;
+  icon?: string;
+  iconRight?: string;
+  href?: string;
+  className?: string;
+  children?: React.ReactNode;
+}
 
 export function Button({
   variant = "primary",
   size = "md",
   icon,
   iconRight,
-  disabled,
   href,
-  onClick,
+  className = "",
   children,
-  style,
-}: {
-  variant?: "primary" | "gold" | "outline" | "outline-light" | "ghost";
-  size?: "sm" | "md" | "lg";
-  icon?: string;
-  iconRight?: string;
-  disabled?: boolean;
-  href?: string;
-  onClick?: () => void;
-  children?: React.ReactNode;
-  style?: React.CSSProperties;
-}) {
-  const sizes = {
-    sm: { padding: "8px 18px", fontSize: 13 },
-    md: { padding: "13px 28px", fontSize: 15 },
-    lg: { padding: "16px 36px", fontSize: 16 },
-  };
+}: ButtonProps) {
+  const classes = [
+    "inline-flex items-center gap-2.5 font-[var(--font-display)] font-semibold tracking-[0.01em] rounded-[var(--radius-pill)] no-underline leading-tight transition-all duration-300",
+    sizeClasses[size],
+    variantClasses[variant],
+    className,
+  ].join(" ");
 
-  const variantStyles: Record<string, React.CSSProperties> = {
-    primary: {
-      background: "var(--brand-primary)",
-      color: "#fff",
-      border: "2px solid var(--brand-primary)",
-    },
-    gold: {
-      background: "var(--gradient-gold)",
-      color: "var(--violet-950)",
-      border: "2px solid transparent",
-    },
-    outline: {
-      background: "transparent",
-      color: "var(--brand-primary)",
-      border: "2px solid var(--brand-primary)",
-    },
-    "outline-light": {
-      background: "transparent",
-      color: "#fff",
-      border: "2px solid #fff",
-    },
-    ghost: {
-      background: "transparent",
-      color: "var(--brand-primary)",
-      border: "2px solid transparent",
-    },
-  };
+  const content = (
+    <>
+      {icon && <i className={icon} aria-hidden="true" />}
+      {children}
+      {iconRight && <i className={iconRight} aria-hidden="true" />}
+    </>
+  );
 
-  const hoverStyles: Record<string, React.CSSProperties> = {
-    primary: {
-      background: "var(--gold-600)",
-      borderColor: "var(--gold-600)",
-      color: "var(--violet-950)",
-    },
-    gold: {
-      filter: "brightness(1.08)",
-    },
-    outline: {
-      background: "var(--brand-primary)",
-      color: "#fff",
-    },
-    "outline-light": {
-      background: "#fff",
-      color: "var(--brand-primary)",
-    },
-    ghost: {
-      color: "var(--gold-700)",
-    },
-  };
+  if (href) {
+    return (
+      <Link href={href} className={classes}>
+        {content}
+      </Link>
+    );
+  }
 
-  const sizeStyles = sizes[size];
-
-  const [hover, setHover] = React.useState(false);
-
-  React.useEffect(() => {
-    const handleEnter = () => setHover(true);
-    const handleLeave = () => setHover(false);
-    window.addEventListener("mouseenter", handleEnter);
-    window.addEventListener("mouseleave", handleLeave);
-    return () => {
-      window.removeEventListener("mouseenter", handleEnter);
-      window.removeEventListener("mouseleave", handleLeave);
-    };
-  }, []);
-
-  const commonStyle: React.CSSProperties = {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: 10,
-    fontFamily: "'Poppins', system-ui, sans-serif",
-    fontWeight: 600,
-    letterSpacing: "0.01em",
-    borderRadius: "999px",
-    cursor: disabled ? "not-allowed" : "pointer",
-    opacity: disabled ? 0.45 : 1,
-    transition: "all var(--dur-base, .2s) var(--ease-standard, cubic-bezier(.2,.7,.2,1))",
-    textDecoration: "none",
-    lineHeight: 1.2,
-    ...sizeStyles,
-    ...variantStyles[variant],
-    ...(hover && !disabled ? hoverStyles[variant] : {}),
-    ...style,
-  };
-
-  const Tag = href ? "a" : "button";
-
-  return React.createElement(Tag, {
-    href,
-    onClick: disabled ? undefined : onClick,
-    disabled: Tag === "button" ? disabled : undefined,
-    style: commonStyle,
-    onMouseEnter: () => setHover(true),
-    onMouseLeave: () => setHover(false),
-  }, icon && React.createElement("i", { className: icon, "aria-hidden": "true" }), children, iconRight && React.createElement("i", { className: iconRight, "aria-hidden": "true" }));
+  return <button className={classes}>{content}</button>;
 }
+
 export default Button;

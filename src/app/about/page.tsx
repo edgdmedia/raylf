@@ -1,572 +1,228 @@
-import Image from "next/image";
-import { useTheme } from "../components/use-theme";
-import { SiteNav } from "../components/layout/site-nav";
-import { SiteFooter } from "../components/layout/site-footer";
-import { SectionHeading } from "../components/ui/section-heading";
-import { Button } from "../components/ui/button";
-import { Eyebrow } from "../components/ui/eyebrow";
-import { RoyalQuote } from "../components/ui/royal-quote";
-import { pillars, milestones } from "../data/about";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { SiteNav } from "@/components/layout/site-nav";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { PageHero } from "@/components/ui/page-hero";
+import { Button } from "@/components/ui/button";
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { RoyalQuote } from "@/components/ui/royal-quote";
+import { pillars, milestones } from "@/data/about";
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "RAYLF is a programme of the Royal African Foundation of His Imperial Majesty, the 51st Ooni of Ife — recognising and convening young African leaders aged 20 to 39.",
+};
 
 export default function About() {
-  const { theme, toggleTheme } = useTheme();
-
   return (
     <>
       <SiteNav />
-      <main>
-        {/* About Hero */}
-        <section
-          data-screen-label="About Hero"
-          style={{
-            position: "relative",
-            marginTop: "-84px",
-            minHeight: "78vh",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end",
-            background: "#240145",
-            overflowX: "clip",
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "url(/photos/royal-audience.jpg) center/cover",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background:
-                "linear-gradient(180deg, rgba(36, 1, 69, .6) 0%, rgba(36, 1, 69, .45) 40%, rgba(36, 1, 69, .95) 85%, #240145 100%)",
-            }}
-          />
-          <div
-            style={{
-              position: "relative",
-              width: "100%",
-              maxWidth: 1320,
-              margin: "0 auto",
-              padding: "200px var(--container-pad) 72px",
-              boxSizing: "border-box",
-              display: "flex",
-              flexDirection: "column",
-              gap: 28,
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                gap: 10,
-                alignItems: "center",
-                color: "rgba(255, 255, 255, .7)",
-              }}
+
+      <PageHero
+        image="/photos/royal-audience.jpg"
+        crumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
+        title="Our"
+        goldWord="History"
+        intro="A programme of the Royal African Foundation, convening the most outstanding 20 to 39-year olds across the globe under royal patronage."
+        height="78vh"
+        scrim="down"
+      />
+
+      {/* WHO WE ARE */}
+      <section className="section-pad">
+        <div className="container-raylf grid grid-cols-[repeat(auto-fit,minmax(min(100%,440px),1fr))] items-start gap-[72px]">
+          <div className="flex flex-col gap-6 lg:sticky lg:top-[120px]">
+            <Eyebrow tone="gold">Who We Are</Eyebrow>
+            <h2
+              className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+              style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
             >
-              <a href="/" style={{ color: "rgba(255, 255, 255, .7)" }}>
-                Home
-              </a>
-              <i
-                className="fa-solid fa-chevron-right"
-                style={{ fontSize: 10 }}
-              />
-              <span style="color: #fff3a8">About</span>
-            </div>
-            <h1
-              style={{
-                margin: 0,
-                color: "#fff",
-                fontFamily: "'Poppins', system-ui, sans-serif",
-                fontWeight: 700,
-                fontSize: "clamp(52px, 9vw, 132px)",
-                lineHeight: ".92",
-                letterSpacing: "-.04em",
-                textWrap: "balance",
-              }}
-            >
-              Our <span
-                style={{
-                  background:
-                    "linear-gradient(100deg, #c48a1f 0%, #f2b84b 48%, #d29b29 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                }}
-              >
-                History
-              </span>
-            </h1>
-            <p
-              style={{
-                margin: 0,
-                maxWidth: 640,
-                fontSize: 19,
-                lineHeight: 1.6,
-                color: "rgba(255, 255, 255, .82)",
-                textWrap: "pretty",
-              }}
-            >
-              A programme of the Royal African Foundation, convening the most outstanding 20 to 39-year olds across the globe under royal patronage.
+              Rooted in the Kingdoms of Africa.
+            </h2>
+          </div>
+          <div className="flex flex-col gap-6">
+            <p className="m-0 text-xl leading-[1.65]" style={{ color: "var(--t-fg)" }}>
+              RAYLF&rsquo;s mission is to redefine centuries of the rich
+              resilient spirit of African Kingdoms which embodies many defining
+              principles of its identity.
             </p>
-          </div>
-        </section>
-
-        {/* Who We Are */}
-        <section
-          data-screen-label="Who We Are"
-          style={{
-            padding: "140px var(--container-pad)",
-          }}
-        >
-          <div
-            style={{
-              maxWidth: 1320,
-              margin: "0 auto",
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 440px), 1fr))",
-              gap: 72,
-              alignItems: "start",
-            }}
-          >
+            <p className="m-0 text-lg leading-[1.7]" style={{ color: "var(--t-muted)" }}>
+              The Royal African Young Leadership Forum is a programme of the
+              Royal African Foundation of His Imperial Majesty Oba Adeyeye
+              Enitan Ogunwusi, Ojaja II, the 51st Ooni of Ife. It recognises and
+              convenes young African leaders aged 20 to 39, chiefly through the
+              RAYLF Awards.
+            </p>
+            <p className="m-0 text-lg leading-[1.7]" style={{ color: "var(--t-muted)" }}>
+              Through the Awards and programmes such as G2G Millionaires, RAYLF
+              celebrates the success stories of young leaders and connects them
+              to Africa&rsquo;s economic prosperity, the blessings of its natural
+              resources and the valuable inheritance of its creative culture.
+            </p>
             <div
+              className="mt-6 aspect-[16/10] rounded-[var(--radius-lg)] bg-cover bg-center"
               style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 24,
-                position: "sticky",
-                top: 120,
+                backgroundImage: "url(/photos/award-presentation-03.jpg)",
+                boxShadow: "var(--t-shadow)",
               }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* OUR MISSION — PILLARS */}
+      <section className="section-pad" style={{ background: "var(--t-sec)" }}>
+        <div className="container-raylf flex flex-col gap-14">
+          <div className="flex max-w-[720px] flex-col gap-5">
+            <Eyebrow tone="gold">Our Mission</Eyebrow>
+            <h2
+              className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+              style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
             >
-              <Eyebrow tone="gold">Who We Are</Eyebrow>
-              <h2
-                style={{
-                  margin: 0,
-                  color: "var(--t-fg)",
-                  fontFamily: "'Poppins', system-ui, sans-serif",
-                  fontWeight: 700,
-                  fontSize: "clamp(38px, 5vw, 68px)",
-                  lineHeight: 1,
-                  letterSpacing: "-.03em",
-                  textWrap: "balance",
-                }}
-              >
-                Rooted in the Kingdoms of Africa.
-              </h2>
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: 20,
-                  lineHeight: 1.65,
-                  color: "var(--t-fg)",
-                  textWrap: "pretty",
-                }}
-              >
-                RAYLF's mission is to redefine centuries of the rich resilient spirit of African Kingdoms which embodies many defining principles of its identity.
-              </p>
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: 18,
-                  lineHeight: 1.7,
-                  color: "var(--t-muted)",
-                  textWrap: "pretty",
-                }}
-              >
-                The Royal African Young Leadership Forum is a programme of the Royal African Foundation of His Imperial Majesty Oba Adeyeye Enitan Ogunwusi, Ojaja II, the 51st Ooni of Ife. It recognises and convenes young African leaders aged 20 to 39, chiefly through the RAYLF Awards.
-              </p>
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: 18,
-                  lineHeight: 1.7,
-                  color: "var(--t-muted)",
-                  textWrap: "pretty",
-                }}
-              >
-                Through the Awards and programmes such as G2G Millionaires, RAYLF celebrates the success stories of young leaders and connects them to Africa's economic prosperity, the blessings of its natural resources and the valuable inheritance of its creative culture.
-              </p>
+              Shaping. Transforming. Anchoring.
+            </h2>
+          </div>
+          <div
+            className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-px overflow-hidden rounded-[var(--radius-lg)]"
+            style={{ background: "var(--t-line)" }}
+          >
+            {pillars.map((p) => (
               <div
-                style={{
-                  aspectRatio: "16 / 10",
-                  borderRadius: "24px",
-                  background: "url(/photos/award-presentation-03.jpg) center/cover",
-                  boxShadow: "var(--t-shadow)",
-                }}
-              />
-            </div>
-            <div></div>
-          </div>
-        </section>
-
-        {/* Mission */}
-        <section
-          data-screen-label="Pillars"
-          style={{
-            padding: "120px var(--container-pad)",
-            background: "var(--t-sec)",
-          }}
-        >
-          <div
-            style={{
-              maxWidth: 1320,
-              margin: "0 auto",
-              display: "flex",
-              flexDirection: "column",
-              gap: 56,
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 20,
-                maxWidth: 720,
-              }}
-            >
-              <Eyebrow tone={theme === "dark" ? "light" : "gold"}>Our Mission</Eyebrow>
-              <h2
-                style={{
-                  margin: 0,
-                  color: "var(--t-fg)",
-                  fontFamily: "'Poppins', system-ui, sans-serif",
-                  fontWeight: 700,
-                  fontSize: "clamp(38px, 5vw, 68px)",
-                  lineHeight: 1,
-                  letterSpacing: "-.03em",
-                  textWrap: "balance",
-                }}
+                key={p.n}
+                className="flex min-h-[280px] flex-col gap-[18px] p-[40px]"
+                style={{ background: "var(--t-bg)" }}
               >
-                Shaping. Transforming. Anchoring.
-              </h2>
-            </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
-                gap: "1px",
-                background: "var(--t-line)",
-                borderRadius: "24px",
-                overflow: "hidden",
-              }}
-            >
-              {pillars.map((pillar, i) => (
-                <div
-                  key={i}
-                  style={{
-                    padding: "40px 32px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 18,
-                    minHeight: 280,
-                    boxSizing: "border-box",
-                  }}
+                <span
+                  className="text-sm font-semibold tracking-[0.1em]"
+                  style={{ fontFamily: "var(--font-display)", color: "var(--t-gold)" }}
                 >
+                  {p.n}
+                </span>
+                <h3
+                  className="mt-auto text-[32px] tracking-[-0.02em]"
+                  style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
+                >
+                  {p.title}
+                </h3>
+                <p className="m-0 text-base leading-[1.65]" style={{ color: "var(--t-muted)" }}>
+                  {p.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ROYAL PATRON — always dark */}
+      <section className="relative overflow-hidden py-[140px]" style={{ background: "#240145", color: "#fff" }}>
+        <div
+          className="pointer-events-none absolute right-[-200px] top-1/2 h-[800px] w-[800px] -translate-y-1/2 rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(180,73,220,.35) 0%, rgba(180,73,220,0) 65%)",
+          }}
+        />
+        <div className="container-raylf relative grid grid-cols-[repeat(auto-fit,minmax(min(100%,420px),1fr))] items-center gap-20">
+          <div className="relative">
+            <div
+              className="absolute rounded-[var(--radius-lg)]"
+              style={{ inset: "24px -24px -24px 24px", border: "2px solid var(--gold-500)" }}
+            />
+            <div
+              className="relative aspect-[4/5] rounded-[var(--radius-lg)] bg-cover bg-center"
+              style={{
+                backgroundImage: "url(/photos/his-majesty-throne.jpg)",
+                boxShadow: "0 30px 80px rgba(10,0,25,.6)",
+              }}
+            />
+          </div>
+          <div className="flex flex-col gap-7">
+            <Eyebrow tone="light">Royal Patron</Eyebrow>
+            <h2
+              className="text-[clamp(34px,4vw,56px)] leading-[1.05] tracking-[-0.03em] text-white"
+              style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
+            >
+              His Imperial Majesty Oba Adeyeye Enitan Ogunwusi, Ojaja II
+            </h2>
+            <p className="m-0 text-lg leading-[1.7] text-white/80">
+              The 51st Ooni of Ife and founder of the Royal African Foundation,
+              under whose patronage RAYLF recognises young African leaders.
+            </p>
+            <RoyalQuote tone="dark" size="lg" attribution="His Imperial Majesty (H.I.M) Ooni of Ife">
+              Young Africans are the spirit, soul and memory of Africa.
+            </RoyalQuote>
+          </div>
+        </div>
+      </section>
+
+      {/* MILESTONES */}
+      <section className="section-pad">
+        <div className="container-raylf flex flex-col gap-16">
+          <div className="flex flex-col gap-5">
+            <Eyebrow tone="gold">Milestones</Eyebrow>
+            <h2
+              className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+              style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
+            >
+              The RAYLF Awards
+            </h2>
+          </div>
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-8">
+            {milestones.map((m) => (
+              <Link
+                key={m.year}
+                href="/awards"
+                className="flex flex-col gap-4"
+                style={{ color: "var(--t-fg)" }}
+              >
+                <div className="flex items-center gap-3">
                   <span
+                    className="h-3.5 w-3.5 flex-none rounded-full"
                     style={{
-                      fontFamily: "'Poppins', system-ui, sans-serif",
-                      fontWeight: 600,
-                      fontSize: 14,
-                      letterSpacing: ".1em",
-                      color: "var(--t-gold)",
+                      background: "var(--gradient-gold)",
+                      boxShadow: "0 0 16px rgba(242,184,75,.6)",
                     }}
-                  >
-                    {pillar.n}
-                  </span>
-                  <h3
-                    style={{
-                      margin: 0,
-                      marginTop: "auto",
-                      color: "var(--t-fg)",
-                      fontFamily: "'Poppins', system-ui, sans-serif",
-                      fontWeight: 700,
-                      fontSize: 32,
-                      letterSpacing: "-.02em",
-                    }}
-                  >
-                    {pillar.title}
-                  </h3>
-                  <p
-                    style={{
-                      margin: 0,
-                      fontSize: 16,
-                      lineHeight: 1.65,
-                      color: "var(--t-muted)",
-                    }}
-                  >
-                    {pillar.body}
-                  </p>
+                  />
+                  <span
+                    className="h-0.5 flex-1 rounded"
+                    style={{ background: "var(--t-line)" }}
+                  />
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Royal Patron */}
-        <section
-          data-screen-label="Royal Patron"
-          style={{
-            position: "relative",
-            padding: "140px var(--container-pad)",
-            background: "#240145",
-            color: "#fff",
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              right: -200,
-              top: "50%",
-              width: 800,
-              height: 800,
-              transform: "translateY(-50%)",
-              borderRadius: "50%",
-              background:
-                "radial-gradient(circle, rgba(180, 73, 220, .35) 0%, rgba(180, 73, 220, 0) 65%)",
-            }}
-          />
-          <div
-            style={{
-              maxWidth: 1320,
-              margin: "0 auto",
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 420px), 1fr))",
-              gap: 80,
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                position: "relative",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  inset: "24px -24px -24px 24px",
-                  border: "2px solid var(--gold-500)",
-                  borderRadius: "24px",
-                }}
-              />
-              <div
-                style={{
-                  position: "relative",
-                  aspectRatio: "4 / 5",
-                  borderRadius: "24px",
-                  background: "url(/photos/his-majesty-throne.jpg) center/cover",
-                  boxShadow: "0 30px 80px rgba(10, 0, 25, .6)",
-                }}
-              />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 28,
-              }}
-            >
-              <Eyebrow tone="light">Royal Patron</Eyebrow>
-              <h2
-                style={{
-                  margin: 0,
-                  color: "#fff",
-                  fontFamily: "'Poppins', system-ui, sans-serif",
-                  fontWeight: 700,
-                  fontSize: "clamp(34px, 4vw, 56px)",
-                  lineHeight: 1.05,
-                  letterSpacing: "-.03em",
-                  textWrap: "balance",
-                }}
-              >
-                His Imperial Majesty Oba Adeyeye Enitan Ogunwusi, Ojaja II
-              </h2>
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: 18,
-                  lineHeight: 1.7,
-                  color: "rgba(255, 255, 255, .8)",
-                }}
-              >
-                The 51st Ooni of Ife and founder of the Royal African Foundation, under whose patronage RAYLF recognises young African leaders.
-              </p>
-              <i
-                style={{
-                  fontFamily: "'Poppins', system-ui, sans-serif",
-                  fontStyle: "italic",
-                  fontWeight: 500,
-                  fontSize: "clamp(26px, 3vw, 40px)",
-                  lineHeight: 1.5,
-                  color: "#fff3a8",
-                }}
-              >
-                "Young Africans are the spirit, soul and memory of Africa."
-              </i>
-            </div>
-          </div>
-        </section>
-
-        {/* Timeline / Milestones */}
-        <section
-          data-screen-label="Timeline"
-          style={{
-            padding: "140px var(--container-pad)",
-          }}
-        >
-          <div
-            style={{
-              maxWidth: 1320,
-              margin: "0 auto",
-              display: "flex",
-              flexDirection: "column",
-              gap: 64,
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 20,
-              }}
-            >
-              <Eyebrow tone="gold">Milestones</Eyebrow>
-              <h2
-                style={{
-                  margin: 0,
-                  color: "var(--t-fg)",
-                  fontFamily: "'Poppins', system-ui, sans-serif",
-                  fontWeight: 700,
-                  fontSize: "clamp(38px, 5vw, 68px)",
-                  lineHeight: 1,
-                  letterSpacing: "-.03em",
-                  textWrap: "balance",
-                }}
-              >
-                The RAYLF Awards
-              </h2>
-            </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))",
-                gap: 32,
-              }}
-            >
-              {milestones.map((m) => (
-                <a
-                  key={m.year}
-                  href="/awards"
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 16,
-                    color: "var(--t-fg)",
-                    styleHover: { color: "var(--t-fg)" },
-                  }}
+                <div
+                  className="text-[72px] leading-none tracking-[-0.04em]"
+                  style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 12,
-                    }}
-                  >
-                    <span
-                      style={{
-                        width: 14,
-                        height: 14,
-                        borderRadius: "50%",
-                        background: "linear-gradient(100deg, #c48a1f 0%, #f2b84b 48%, #d29b29 100%)",
-                        boxShadow: "0 0 16px rgba(242, 184, 75, .6)",
-                      }}
-                    />
-                    <span
-                      style={{
-                        flex: 1,
-                        height: 2,
-                        borderRadius: 2,
-                        background: "var(--t-line)",
-                      }}
-                    />
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "'Poppins', system-ui, sans-serif",
-                      fontWeight: 700,
-                      fontSize: 72,
-                      lineHeight: 1,
-                      letterSpacing: "-.04em",
-                    }}
-                  >
-                    {m.year}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: 16,
-                      lineHeight: 1.6,
-                      color: "var(--t-muted)",
-                    }}
-                  >
-                    {m.label}
-                  </div>
-                </a>
-              ))}
-            </div>
+                  {m.year}
+                </div>
+                <div className="text-base leading-[1.6]" style={{ color: "var(--t-muted)" }}>
+                  {m.label}
+                </div>
+              </Link>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* CTA */}
-        <section
-          data-screen-label="CTA"
-          style={{
-            padding: "0 var(--container-pad) 120px",
-          }}
-        >
+      {/* CTA */}
+      <section className="pb-[120px]">
+        <div className="container-raylf">
           <div
-            style={{
-              position: "relative",
-              maxWidth: 1320,
-              margin: "0 auto",
-              borderRadius: 32,
-              overflow: "hidden",
-              background:
-                "linear-gradient(180deg, rgba(36, 1, 69, .88) , rgba(36, 1, 69, .88)), url(/brand/africa-world-map.jpg) center/cover",
-              padding: "80px 48px",
-              boxSizing: "border-box",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: 32,
-              flexWrap: "wrap",
-            }}
+            className="flex flex-wrap items-center justify-between gap-8 overflow-hidden rounded-[32px] bg-[var(--gradient-violet-sky)] px-8 py-20 md:px-12"
           >
             <h2
-              style={{
-                margin: 0,
-                color: "#fff",
-                fontFamily: "'Poppins', system-ui, sans-serif",
-                fontWeight: 700,
-                fontSize: "clamp(34px, 4.5vw, 64px)",
-                lineHeight: 1,
-                letterSpacing: "-.03em",
-                textWrap: "balance",
-                maxWidth: 640,
-              }}
+              className="max-w-[640px] text-[clamp(34px,4.5vw,64px)] leading-none tracking-[-0.03em] text-white"
+              style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
             >
               Explore our programmes.
             </h2>
-            <PillButton
-              variant="gold"
-              size="lg"
-              href="/programmes"
-              iconRight="fa-solid fa-arrow-right"
-            >
+            <Button variant="gold" size="lg" href="/programmes" iconRight="fa-solid fa-arrow-right">
               Programmes
-            </PillButton>
+            </Button>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
+
       <SiteFooter />
     </>
   );
