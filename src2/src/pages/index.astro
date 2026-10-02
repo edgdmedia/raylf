@@ -210,22 +210,32 @@ const sortedEditions = [...editions].sort((a, b) =>
 				</div>
 				<a class="btn btn-outline btn-md" href="/awards#awardees">Awardees <i class="fa-solid fa-arrow-right" /></a>
 			</div>
-			<div
-				style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px"
-			>
-				{
-					sortedEditions.map((e) => (
-						<a href={`/awards/${e.data.year}`} class="edition-tile card-lift">
-							<div class="hero-bg" style={`background-image:url(${e.data.image_url})`} />
-							<div style="position:absolute;inset:0;background:var(--overlay-scrim)" />
-							<span class="edition-tag">{e.data.tag}</span>
-							<div class="edition-year">
-								{e.data.year}
-								<div class="edition-label">{e.data.upcoming ? e.data.location : "RAYLF Awards"}</div>
-							</div>
-						</a>
-					))
-				}
+			<div class="flex-col gap-5">
+				<div class="edition-rail" id="edition-rail">
+					{
+						sortedEditions.map((e) => (
+							<a href={`/awards/${e.data.year}`} class="edition-tile card-lift">
+								<div class="hero-bg" style={`background-image:url(${e.data.image_url})`} />
+								<div style="position:absolute;inset:0;background:var(--overlay-scrim)" />
+								<span class="edition-tag">{e.data.tag}</span>
+								<div class="edition-year">
+									{e.data.year}
+									<div class="edition-label">
+										{e.data.upcoming ? e.data.location : "RAYLF Awards"}
+									</div>
+								</div>
+							</a>
+						))
+					}
+				</div>
+				<div class="rail-controls">
+					<button type="button" class="rail-btn" id="rail-prev" aria-label="Scroll editions left" disabled>
+						<i class="fa-solid fa-chevron-left" />
+					</button>
+					<button type="button" class="rail-btn" id="rail-next" aria-label="Scroll editions right">
+						<i class="fa-solid fa-chevron-right" />
+					</button>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -312,6 +322,22 @@ const sortedEditions = [...editions].sort((a, b) =>
 			i = (i + 1) % slides.length;
 			slides[i].style.opacity = "1";
 		}, 7000);
+	}
+
+	const rail = document.getElementById("edition-rail");
+	const prev = document.getElementById("rail-prev") as HTMLButtonElement | null;
+	const next = document.getElementById("rail-next") as HTMLButtonElement | null;
+	if (rail && prev && next) {
+		const update = () => {
+			prev.disabled = rail.scrollLeft <= 4;
+			next.disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 4;
+		};
+		const step = () => (rail.firstElementChild as HTMLElement)?.offsetWidth ?? 300;
+		prev.addEventListener("click", () => rail.scrollBy({ left: -(step() + 20), behavior: "smooth" }));
+		next.addEventListener("click", () => rail.scrollBy({ left: step() + 20, behavior: "smooth" }));
+		rail.addEventListener("scroll", update, { passive: true });
+		window.addEventListener("resize", update);
+		update();
 	}
 </script>
 

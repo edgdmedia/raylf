@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { SocialLinks } from "@/components/ui/social-links";
 import { HeroBackdrop } from "@/components/ui/hero-backdrop";
+import { EditionRail } from "@/components/ui/edition-rail";
 import {
   facts,
   programmes,
@@ -331,42 +332,8 @@ export default function Home() {
             </Button>
           </div>
 
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,260px),1fr))] gap-5">
-            {editions.map((e) => (
-              <Link
-                key={e.year}
-                href={`/awards/${e.year}`}
-                className="card-lift relative aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)]"
-                style={{ border: "1px solid rgba(255,243,168,.14)" }}
-              >
-                <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${e.img})` }}
-                />
-                <div className="absolute inset-0" style={{ background: "var(--overlay-scrim)" }} />
-                <div className="absolute inset-x-0 top-0 flex items-center justify-between p-[22px]">
-                  <span
-                    className="rounded-[var(--radius-pill)] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-[#FFF3A8]"
-                    style={{
-                      background: "rgba(36,1,69,.7)",
-                      border: "1px solid rgba(255,243,168,.3)",
-                    }}
-                  >
-                    {e.tag}
-                  </span>
-                </div>
-                <div className="absolute inset-x-0 bottom-0 flex flex-col gap-1.5 p-6">
-                  <div
-                    className="text-[64px] leading-none tracking-[-0.04em] text-white"
-                    style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
-                  >
-                    {e.year}
-                  </div>
-                  <div className="text-sm text-white/80">{e.label}</div>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <EditionRail editions={editions} />
+
         </div>
       </section>
 

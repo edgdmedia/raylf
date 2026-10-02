@@ -966,6 +966,58 @@ a.awardee-link {
 	display: block;
 }
 
+/* Edition rail (horizontal scroll carousel) */
+
+.edition-rail {
+	display: flex;
+	gap: 20px;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	padding-bottom: 12px;
+	margin-bottom: -12px;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+.edition-rail::-webkit-scrollbar {
+	display: none;
+}
+
+.edition-rail > * {
+	flex: 0 0 clamp(240px, 70vw, 300px);
+	scroll-snap-align: start;
+}
+
+.rail-controls {
+	display: flex;
+	gap: 10px;
+	align-self: flex-end;
+}
+
+.rail-btn {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	border: 1px solid var(--t-line);
+	background: var(--t-chip);
+	color: var(--t-fg);
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.25s var(--ease-standard);
+}
+
+.rail-btn:hover:not(:disabled) {
+	background: var(--t-gold);
+	color: var(--t-bg);
+}
+
+.rail-btn:disabled {
+	opacity: 0.35;
+	cursor: default;
+}
+
 /* Chips / tabs */
 
 .chip {
