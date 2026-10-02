@@ -7,6 +7,9 @@ import { sqlite } from "emdash/db";
 export default defineConfig({
 	output: "server",
 	adapter: node({ mode: "standalone" }),
+	redirects: {
+		"/admin": "/_emdash/admin/",
+	},
 	image: {
 		layout: "constrained",
 		responsiveStyles: true,
@@ -19,6 +22,12 @@ export default defineConfig({
 				directory: "./uploads",
 				baseUrl: "/_emdash/api/media/file",
 			}),
+			admin: {
+				logo: "/favicon.png",
+				siteName: "RAYLF CMS",
+				footerLabel: "EDGD Media",
+				favicon: "/favicon.png",
+			},
 		}),
 	],
 	devToolbar: { enabled: false },
