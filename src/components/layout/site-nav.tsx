@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "../use-theme";
 import { Button } from "../ui/button";
 
@@ -19,6 +19,14 @@ export function SiteNav() {
   const pathname = usePathname();
   const { theme, toggleTheme, mounted } = useTheme();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -26,13 +34,19 @@ export function SiteNav() {
   const icon = !mounted || theme === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon";
 
   return (
-    <div className="sticky top-0 z-50 px-4 pt-4 pb-0">
+    <div
+      className="sticky top-0 z-50 transition-[padding] duration-300"
+      style={{ padding: scrolled ? 0 : "16px 16px 0" }}
+    >
       <div
-        className="mx-auto flex w-full max-w-[1320px] flex-wrap items-center gap-x-4 gap-y-2 rounded-[var(--radius-pill)] py-2.5 pl-6 pr-3"
+        className="mx-auto flex w-full flex-wrap items-center gap-x-4 gap-y-2 py-2.5 transition-all duration-300"
         style={{
-          background: "rgba(36,1,69,.88)",
-          border: "1px solid rgba(255,243,168,.16)",
-          boxShadow: "0 12px 40px rgba(10,0,25,.45)",
+          maxWidth: scrolled ? "none" : 1320,
+          borderRadius: scrolled ? 0 : "var(--radius-pill)",
+          padding: scrolled ? "10px 24px" : "10px 12px 10px 24px",
+          background: scrolled ? "rgba(36,1,69,.97)" : "rgba(36,1,69,.88)",
+          border: scrolled ? "1px solid transparent" : "1px solid rgba(255,243,168,.16)",
+          boxShadow: scrolled ? "0 8px 32px rgba(10,0,25,.5)" : "0 12px 40px rgba(10,0,25,.45)",
           backdropFilter: "blur(8px)",
         }}
       >

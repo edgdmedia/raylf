@@ -35,7 +35,7 @@ export default function About() {
           <div className="flex flex-col gap-6 lg:sticky lg:top-[120px]">
             <Eyebrow tone="gold">Who We Are</Eyebrow>
             <h2
-              className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+              className="text-[clamp(38px,5vw,68px)] leading-[1.12] tracking-[-0.03em]"
               style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
             >
               Rooted in the Kingdoms of Africa.
@@ -77,7 +77,7 @@ export default function About() {
           <div className="flex max-w-[720px] flex-col gap-5">
             <Eyebrow tone="gold">Our Mission</Eyebrow>
             <h2
-              className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+              className="text-[clamp(38px,5vw,68px)] leading-[1.12] tracking-[-0.03em]"
               style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
             >
               Shaping. Transforming. Anchoring.
@@ -162,7 +162,7 @@ export default function About() {
           <div className="flex flex-col gap-5">
             <Eyebrow tone="gold">Milestones</Eyebrow>
             <h2
-              className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+              className="text-[clamp(38px,5vw,68px)] leading-[1.12] tracking-[-0.03em]"
               style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
             >
               The RAYLF Awards
@@ -211,7 +211,7 @@ export default function About() {
             className="flex flex-wrap items-center justify-between gap-8 overflow-hidden rounded-[32px] bg-[image:var(--gradient-violet-sky)] px-8 py-20 md:px-12"
           >
             <h2
-              className="max-w-[640px] text-[clamp(34px,4.5vw,64px)] leading-none tracking-[-0.03em] text-white"
+              className="max-w-[640px] text-[clamp(34px,4.5vw,64px)] leading-[1.12] tracking-[-0.03em] text-white"
               style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
             >
               Explore our programmes.

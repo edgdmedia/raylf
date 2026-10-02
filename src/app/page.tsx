@@ -79,22 +79,20 @@ export default function Home() {
           </div>
 
           <h1
-            className="max-w-[1200px] text-[clamp(52px,10vw,148px)] leading-[.92] tracking-[-0.04em] text-white"
+            className="max-w-[1200px] text-[clamp(52px,10vw,148px)] leading-[1.05] tracking-[-0.04em] text-white"
             style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
           >
             A place for Africa&rsquo;s{" "}
             <span className="gold-foil">young leaders.</span>
           </h1>
 
-          <div
-            className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] items-end gap-8 border-t border-white/15 pt-8"
-          >
+          <div className="flex flex-col gap-8 border-t border-white/15 pt-8">
             <p className="m-0 max-w-[520px] text-[19px] leading-[1.6] text-white/80">
               RAYLF recognises and convenes the most outstanding 20 to 39-year
               olds across the globe, shaping, transforming and anchoring the
               future of the continent.
             </p>
-            <div className="flex flex-wrap justify-end gap-3.5">
+            <div className="flex flex-wrap justify-start gap-3.5">
               <Button variant="gold" size="lg" href="/awards" iconRight="fa-solid fa-arrow-right">
                 RAYLF Awards
               </Button>
@@ -172,7 +170,7 @@ export default function Home() {
           <div className="flex flex-col gap-7">
             <Eyebrow tone="gold">About RAYLF</Eyebrow>
             <h2
-              className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+              className="text-[clamp(38px,5vw,68px)] leading-[1.12] tracking-[-0.03em]"
               style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
             >
               The spirit, soul and memory of Africa.
@@ -225,7 +223,7 @@ export default function Home() {
             <div className="flex max-w-[720px] flex-col gap-5">
               <Eyebrow tone="gold">What We Do</Eyebrow>
               <h2
-                className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+                className="text-[clamp(38px,5vw,68px)] leading-[1.12] tracking-[-0.03em]"
                 style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
               >
                 Find your place.
@@ -322,7 +320,7 @@ export default function Home() {
             <div className="flex max-w-[760px] flex-col gap-5">
               <Eyebrow tone="gold">RAYLF Awards</Eyebrow>
               <h2
-                className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+                className="text-[clamp(38px,5vw,68px)] leading-[1.12] tracking-[-0.03em]"
                 style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
               >
                 Every edition, a new generation.
@@ -337,7 +335,7 @@ export default function Home() {
             {editions.map((e) => (
               <Link
                 key={e.year}
-                href="/awards"
+                href={`/awards/${e.year}`}
                 className="card-lift relative aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)]"
                 style={{ border: "1px solid rgba(255,243,168,.14)" }}
               >
@@ -388,20 +386,33 @@ export default function Home() {
             style={{ backgroundImage: `url(${galleryTeaser[2]})`, minHeight: 220 }}
           />
           <div
-            className="col-span-2 flex flex-col justify-between rounded-[var(--radius-lg)] p-8 text-white"
-            style={{ background: "var(--gradient-royal)", minHeight: 220 }}
+            className="relative col-span-2 overflow-hidden rounded-[var(--radius-lg)] text-white"
+            style={{ minHeight: 220 }}
           >
-            <div className="text-xs font-bold uppercase tracking-[0.18em] text-[#FFF3A8]">
-              Follow the journey
-            </div>
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <div
-                className="text-[32px] tracking-[-0.02em]"
-                style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
-              >
-                @royalafricanlyf
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: "url(/photos/award-greeting.jpg)" }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(100deg, rgba(63,2,142,.92) 0%, rgba(80,2,185,.8) 45%, rgba(180,73,220,.65) 100%)",
+              }}
+            />
+            <div className="relative flex h-full flex-col justify-between gap-6 p-8">
+              <div className="text-xs font-bold uppercase tracking-[0.18em] text-[#FFF3A8]">
+                Follow the journey
               </div>
-              <SocialLinks tone="dark" />
+              <div className="flex flex-wrap items-end justify-between gap-4">
+                <div
+                  className="text-[32px] tracking-[-0.02em]"
+                  style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
+                >
+                  @royalafricanlyf
+                </div>
+                <SocialLinks tone="dark" />
+              </div>
             </div>
           </div>
         </div>
@@ -423,7 +434,7 @@ export default function Home() {
         <div className="container-raylf relative flex flex-col gap-6">
           <Eyebrow tone="light">Global Mission</Eyebrow>
           <h2
-            className="max-w-[760px] text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em] text-white"
+            className="max-w-[760px] text-[clamp(38px,5vw,68px)] leading-[1.12] tracking-[-0.03em] text-white"
             style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
           >
             From Ile-Ife to the world.
@@ -452,7 +463,7 @@ export default function Home() {
             />
             <div className="relative mx-auto flex max-w-[940px] flex-col items-center gap-7">
               <h2
-                className="max-w-[900px] text-[clamp(40px,6vw,88px)] leading-[.95] tracking-[-0.04em] text-white"
+                className="max-w-[900px] text-[clamp(40px,6vw,88px)] leading-[1.05] tracking-[-0.04em] text-white"
                 style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
               >
                 There&rsquo;s a place for you.

@@ -52,7 +52,7 @@ export default function GalleryClient() {
         <div className="container-raylf relative flex flex-col gap-7 pb-20 pt-[200px]">
           <Eyebrow tone="light">Gallery</Eyebrow>
           <h1
-            className="max-w-[1200px] text-[clamp(52px,9vw,132px)] leading-[.92] tracking-[-0.04em] text-white"
+            className="max-w-[1200px] text-[clamp(52px,9vw,132px)] leading-[1.05] tracking-[-0.04em] text-white"
             style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
           >
             Celebrate the <span className="gold-foil">journey.</span>
@@ -130,7 +130,7 @@ export default function GalleryClient() {
                 Follow the journey
               </div>
               <div
-                className="text-[clamp(32px,4vw,56px)] leading-none tracking-[-0.03em] text-white"
+                className="text-[clamp(32px,4vw,56px)] leading-[1.12] tracking-[-0.03em] text-white"
                 style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
               >
                 @royalafricanlyf

@@ -7,7 +7,7 @@ import { Breadcrumbs } from "@/components/ui/page-hero";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { SocialLinks } from "@/components/ui/social-links";
 import { AwardeeCard } from "@/components/ui/awardee-card";
-import { awardees } from "@/data/awards";
+import { awardees, awardeesByYear } from "@/data/awards";
 
 const momentPhotos = [
   "/photos/award-presentation-01.jpg",
@@ -39,7 +39,7 @@ export default async function AwardeePage({ params }: Props) {
   const a = awardees.find((x) => x.slug === slug);
   if (!a) notFound();
 
-  const more = awardees.filter((x) => x.slug !== a.slug).slice(0, 4);
+  const more = awardeesByYear(a.year).filter((x) => x.slug !== a.slug).slice(0, 4);
 
   return (
     <>
@@ -56,9 +56,10 @@ export default async function AwardeePage({ params }: Props) {
               style={{ inset: "24px -24px -24px 24px", border: "2px solid var(--gold-500)" }}
             />
             <div
-              className="relative aspect-[4/5] rounded-[var(--radius-lg)] bg-cover bg-center"
+              className="relative aspect-[4/5] rounded-[var(--radius-lg)] bg-cover"
               style={{
                 backgroundImage: `url(${a.photo})`,
+                backgroundPosition: a.position ?? "center",
                 boxShadow: "0 30px 80px rgba(10,0,25,.6)",
               }}
             />
@@ -71,7 +72,7 @@ export default async function AwardeePage({ params }: Props) {
                 className="mt-1 text-xs font-bold"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                2024
+                {a.year}
               </span>
             </div>
           </div>
@@ -80,13 +81,13 @@ export default async function AwardeePage({ params }: Props) {
             <Breadcrumbs
               items={[
                 { label: "RAYLF Awards", href: "/awards" },
-                { label: "2024", href: "/awards" },
+                { label: a.year, href: `/awards/${a.year}` },
                 { label: a.name },
               ]}
             />
             <Eyebrow tone="light">{a.category}</Eyebrow>
             <h1
-              className="text-[clamp(48px,7vw,104px)] leading-[.95] tracking-[-0.04em] text-white"
+              className="text-[clamp(48px,7vw,104px)] leading-[1.05] tracking-[-0.04em] text-white"
               style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
             >
               {a.name}
@@ -98,13 +99,14 @@ export default async function AwardeePage({ params }: Props) {
               </span>
               <span className="inline-flex items-center gap-2.5 text-white/85">
                 <i className="fa-solid fa-briefcase text-[var(--gold-400)]" />
-                {a.category} · Class of 2024
+                {a.category} · Class of {a.year}
               </span>
             </div>
             <p className="m-0 max-w-[560px] text-lg leading-[1.7] text-white/80">
-              Brief biography of the awardee describing their contributions and
-              achievements. This space honors young African leaders who have
-              made significant impacts in their fields.
+              {a.role}. Recognised at the {a.year} RAYLF Awards for outstanding
+              achievement in {a.category.toLowerCase()} and an unwavering
+              commitment to shaping, transforming and anchoring the future of
+              the continent.
             </p>
             <SocialLinks tone="dark" />
           </div>
@@ -135,7 +137,7 @@ export default async function AwardeePage({ params }: Props) {
           <div className="mb-14 flex flex-col gap-5">
             <Eyebrow tone="gold">Moments</Eyebrow>
             <h2
-              className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+              className="text-[clamp(38px,5vw,68px)] leading-[1.12] tracking-[-0.03em]"
               style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
             >
               On the night.
@@ -157,9 +159,9 @@ export default async function AwardeePage({ params }: Props) {
       <section className="section-pad" style={{ background: "var(--t-sec)" }}>
         <div className="container-raylf flex flex-col gap-14">
           <div className="flex flex-col gap-5">
-            <Eyebrow tone="gold">Class of 2024</Eyebrow>
+            <Eyebrow tone="gold">Class of {a.year}</Eyebrow>
             <h2
-              className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+              className="text-[clamp(38px,5vw,68px)] leading-[1.12] tracking-[-0.03em]"
               style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
             >
               More from the class.
@@ -173,7 +175,8 @@ export default async function AwardeePage({ params }: Props) {
                   name={m.name}
                   category={m.category}
                   country={m.country}
-                  year="2024"
+                  year={m.year}
+                  position={m.position}
                 />
               </Link>
             ))}

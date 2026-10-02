@@ -35,4 +35,5 @@ export const milestones: Milestone[] = [
   { year: "2021", label: "Second edition of the RAYLF Awards" },
   { year: "2022", label: "Third edition of the RAYLF Awards" },
   { year: "2024", label: "Fourth edition of the RAYLF Awards" },
+  { year: "2026", label: "Upcoming edition — happening in Ghana" },
 ];

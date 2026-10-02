@@ -106,7 +106,7 @@ export default async function ProgrammePage({ params }: Props) {
           <div className="flex max-w-[720px] flex-col gap-5">
             <Eyebrow tone="gold">What the programme offers</Eyebrow>
             <h2
-              className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+              className="text-[clamp(38px,5vw,68px)] leading-[1.12] tracking-[-0.03em]"
               style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
             >
               Built for builders.
@@ -149,7 +149,7 @@ export default async function ProgrammePage({ params }: Props) {
           <div className="flex flex-col gap-5">
             <Eyebrow tone="gold">Moments</Eyebrow>
             <h2
-              className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+              className="text-[clamp(38px,5vw,68px)] leading-[1.12] tracking-[-0.03em]"
               style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
             >
               From the journey.

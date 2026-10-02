@@ -4,14 +4,15 @@ interface AwardeeCardProps {
   category?: string;
   year?: string;
   country?: string;
+  position?: string;
 }
 
-export function AwardeeCard({ photo, name, category, year, country }: AwardeeCardProps) {
+export function AwardeeCard({ photo, name, category, year, country, position }: AwardeeCardProps) {
   return (
     <figure className="group relative m-0 overflow-hidden rounded-[var(--radius-lg)] shadow-[var(--shadow-sm)] transition-shadow duration-300 hover:shadow-[var(--t-shadow)]">
       <div
-        className="aspect-[4/5] bg-center bg-cover"
-        style={{ backgroundImage: `url(${photo})` }}
+        className="aspect-[4/5] bg-cover"
+        style={{ backgroundImage: `url(${photo})`, backgroundPosition: position ?? "center" }}
       />
       <div
         className="absolute inset-0 opacity-90 transition-opacity duration-300 group-hover:opacity-100"

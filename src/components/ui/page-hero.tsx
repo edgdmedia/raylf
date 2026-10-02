@@ -76,7 +76,7 @@ export function PageHero({
       <div className="container-raylf relative flex flex-col gap-7 pb-16 pt-[200px]">
         <Breadcrumbs items={crumbs} />
         <h1
-          className="max-w-[1200px] text-[clamp(52px,9vw,132px)] leading-[.92] tracking-[-0.04em] text-white"
+          className="max-w-[1200px] text-[clamp(52px,9vw,132px)] leading-[1.05] tracking-[-0.04em] text-white"
           style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
         >
           {title}{" "}

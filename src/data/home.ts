@@ -19,7 +19,7 @@ export interface Edition {
 }
 
 export const facts: HeroFact[] = [
-  { v: "20–39", l: "Age range of RAYLF leaders" },
+  { v: "512", l: "Leaders recognised across four editions" },
   { v: "4", l: "Award editions since 2020" },
   { v: "51st", l: "Ooni of Ife, Royal Patron" },
 ];
@@ -59,6 +59,7 @@ export const marqueeWords = [
 ];
 
 export const editions: Edition[] = [
+  { year: "2026", label: "Accra, Ghana", tag: "Upcoming", img: "/photos/royal-audience.jpg" },
   { year: "2024", label: "RAYLF Awards", tag: "Latest", img: "/photos/award-stage-01.jpg" },
   { year: "2022", label: "RAYLF Awards", tag: "Edition III", img: "/photos/award-presentation-03.jpg" },
   { year: "2021", label: "RAYLF Awards", tag: "Edition II", img: "/photos/award-presentation-02.jpg" },

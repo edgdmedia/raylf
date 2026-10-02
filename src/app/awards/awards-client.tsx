@@ -7,14 +7,15 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { RoyalQuote } from "@/components/ui/royal-quote";
 import { AwardeeCard } from "@/components/ui/awardee-card";
 import { Breadcrumbs } from "@/components/ui/page-hero";
-import { editions, categories, awardees } from "@/data/awards";
+import { editions, categories, awardeesByYear } from "@/data/awards";
 
 export default function AwardsClient() {
   const [year, setYear] = useState("2024");
   const [cat, setCat] = useState("All");
 
   const ed = editions.find((e) => e.year === year) ?? editions[0];
-  const filtered = awardees.filter((a) => cat === "All" || a.category === cat);
+  const yearAwardees = awardeesByYear(year);
+  const filtered = yearAwardees.filter((a) => cat === "All" || a.category === cat);
 
   const pickYear = (y: string) => {
     setYear(y);
@@ -25,11 +26,11 @@ export default function AwardsClient() {
     <main>
       {/* HERO */}
       <section
-        className="relative flex min-h-[86vh] -mt-[84px] flex-col justify-end"
+        className="relative flex min-h-[86vh] -mt-[84px] flex-col justify-end overflow-hidden"
         style={{ background: "#240145" }}
       >
         <div
-          className="absolute inset-0 bg-cover bg-center transition-[background-image] duration-500"
+          className="kenburns absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${ed.img})` }}
         />
         <div
@@ -53,7 +54,7 @@ export default function AwardsClient() {
 
           <div className="flex flex-wrap items-end justify-between gap-8">
             <h1
-              className="text-[clamp(52px,9vw,132px)] leading-[.92] tracking-[-0.04em] text-white"
+              className="text-[clamp(52px,9vw,132px)] leading-[1.05] tracking-[-0.04em] text-white"
               style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}
             >
               RAYLF Awards <span className="gold-foil">{year}</span>
@@ -87,6 +88,13 @@ export default function AwardsClient() {
                 </button>
               );
             })}
+            <Link
+              href={`/awards/${year}`}
+              className="ml-auto inline-flex items-center gap-2 rounded-[var(--radius-pill)] px-5 py-3 text-sm font-semibold text-[#FFF3A8] hover:bg-white/10"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Edition details <i className="fa-solid fa-arrow-right text-xs" />
+            </Link>
           </div>
         </div>
       </section>
@@ -98,56 +106,83 @@ export default function AwardsClient() {
             <div className="flex flex-col gap-5">
               <Eyebrow tone="gold">Awardees</Eyebrow>
               <h2
-                className="text-[clamp(38px,5vw,68px)] leading-none tracking-[-0.03em]"
+                className="text-[clamp(38px,5vw,68px)] leading-[1.12] tracking-[-0.03em]"
                 style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--t-fg)" }}
               >
                 Class of {year}
               </h2>
             </div>
-            <div className="flex flex-wrap gap-2">
-              {categories.map((c) => {
-                const on = c === cat;
-                return (
-                  <button
-                    key={c}
-                    onClick={() => setCat(c)}
-                    className="cursor-pointer rounded-[var(--radius-pill)] px-[18px] py-[9px] text-sm font-semibold transition-all duration-[250ms]"
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      border: "1px solid var(--t-line)",
-                      background: on ? "var(--t-gold)" : "var(--t-chip)",
-                      color: on ? "var(--t-bg)" : "var(--t-fg)",
-                    }}
-                  >
-                    {c}
-                  </button>
-                );
-              })}
-            </div>
+            {yearAwardees.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {categories.map((c) => {
+                  const on = c === cat;
+                  return (
+                    <button
+                      key={c}
+                      onClick={() => setCat(c)}
+                      className="cursor-pointer rounded-[var(--radius-pill)] px-[18px] py-[9px] text-sm font-semibold transition-all duration-[250ms]"
+                      style={{
+                        fontFamily: "var(--font-body)",
+                        border: "1px solid var(--t-line)",
+                        background: on ? "var(--t-gold)" : "var(--t-chip)",
+                        color: on ? "var(--t-bg)" : "var(--t-fg)",
+                      }}
+                    >
+                      {c}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,250px),1fr))] gap-5">
-            {filtered.map((a) => (
-              <Link
-                key={a.slug}
-                href={`/awardee/${a.slug}`}
-                className="awardee-link card-lift block"
+          {yearAwardees.length === 0 ? (
+            <div
+              className="flex flex-col items-center gap-5 rounded-[var(--radius-lg)] p-16 text-center"
+              style={{ background: "var(--t-card)", border: "1px solid var(--t-line)" }}
+            >
+              <i className="fa-solid fa-hourglass-half text-3xl" style={{ color: "var(--t-gold)" }} />
+              <h3
+                className="text-2xl"
+                style={{ fontFamily: "var(--font-display)", fontWeight: 600, color: "var(--t-fg)" }}
               >
-                <AwardeeCard
-                  photo={a.photo}
-                  name={a.name}
-                  category={a.category}
-                  country={a.country}
-                  year={year}
-                />
-              </Link>
-            ))}
-          </div>
+                {year} awardees to be announced
+              </h3>
+              <p className="m-0 max-w-[480px] text-base" style={{ color: "var(--t-muted)" }}>
+                The {year} edition happens in Ghana this year. Awardees will be revealed
+                ahead of the ceremony — follow @royalafricanlyf for announcements.
+              </p>
+              <Button variant="gold" href="/awards/2026" iconRight="fa-solid fa-arrow-right">
+                About the {year} edition
+              </Button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,250px),1fr))] gap-5">
+              {filtered.map((a) => (
+                <Link
+                  key={a.slug}
+                  href={`/awardee/${a.slug}`}
+                  className="awardee-link card-lift block"
+                >
+                  <AwardeeCard
+                    photo={a.photo}
+                    name={a.name}
+                    category={a.category}
+                    country={a.country}
+                    year={a.year}
+                    position={a.position}
+                  />
+                </Link>
+              ))}
+            </div>
+          )}
 
-          <p className="m-0 text-[13px]" style={{ color: "var(--t-muted)" }}>
-            Awardee names and categories are placeholders — the live Awards page
-            lists no named recipients.
-          </p>
+          {yearAwardees.length > 0 && year === "2022" && (
+            <p className="m-0 text-[13px]" style={{ color: "var(--t-muted)" }}>
+              Showing the awardees announced publicly for the {year} edition — the full
+              class list is being added progressively.
+            </p>
+          )}
         </div>
       </section>
 
