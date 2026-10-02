@@ -1,0 +1,30 @@
+---
+interface Props {
+	tone?: "light" | "dark";
+	size?: "md" | "lg";
+	attribution?: string;
+}
+const { tone = "light", size = "md", attribution } = Astro.props;
+const dark = tone === "dark";
+---
+
+<figure style="margin:0;border-left:4px solid var(--gold-600);border-radius:4px;padding-left:24px;max-width:760px">
+	<blockquote
+		style={`margin:0;font-family:var(--font-display);font-style:italic;font-weight:500;font-size:${
+			size === "lg" ? 26 : 20
+		}px;line-height:1.5;color:${dark ? "#fff" : "var(--brand-primary)"}`}
+	>
+		&ldquo;<slot />&rdquo;
+	</blockquote>
+	{
+		attribution && (
+			<figcaption
+				style={`margin-top:14px;font-family:var(--font-body);font-weight:700;font-size:15px;color:${
+					dark ? "var(--gold-200)" : "var(--gold-700)"
+				}`}
+			>
+				&mdash; {attribution}
+			</figcaption>
+		)
+	}
+</figure>

@@ -1,0 +1,180 @@
+---
+import Base from "../layouts/Base.astro";
+import Eyebrow from "../components/Eyebrow.astro";
+import { getEmDashCollection } from "emdash";
+
+const { entries: photos } = await getEmDashCollection("gallery_photos", {
+	status: "published",
+	limit: 200,
+});
+
+const albums = ["All", ...new Set(photos.map((p) => p.data.album).filter(Boolean))];
+---
+
+<Base title="Gallery">
+	<main>
+		<!-- HERO -->
+		<section class="page-hero" style="min-height:56vh">
+			<div
+				style="position:absolute;inset:0;background:radial-gradient(50% 50% at 80% 30%, rgba(180,73,220,.4), transparent 70%)"
+			/>
+			<div class="grid-overlay" />
+			<div class="container-raylf page-hero-inner">
+				<Eyebrow tone="light">Gallery</Eyebrow>
+				<h1 class="h-display">
+					Celebrate the <span class="gold-foil">journey.</span>
+				</h1>
+				<p style="max-width:600px;font-size:19px;line-height:1.6;color:rgba(255,255,255,.8)">
+					Celebrate your people. Moments from the Awards, the audiences and the
+					convenings — under royal patronage.
+				</p>
+			</div>
+		</section>
+
+		<!-- CHIPS + GRID -->
+		<section class="section-pad">
+			<div class="container-raylf flex-col gap-10">
+				<div id="album-chips" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+					{
+						albums.map((a) => (
+							<button class:list={{ chip: true, active: a === "All" }} data-album={a}>
+								{a}
+							</button>
+						))
+					}
+				</div>
+				<div class="gallery-grid">
+					{
+						photos.map((p, i) => (
+							<button
+								type="button"
+								class:list={{ "gallery-tile": true, "span-2": p.data.span }}
+								data-album={p.data.album}
+								data-index={i}
+								style={`background-image:url(${p.data.image_url})`}
+								aria-label={`Open photo from ${p.data.album}`}
+							>
+								<span class="album-tag">{p.data.album}</span>
+							</button>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- FOLLOW BAND -->
+		<section style="padding:0 var(--container-pad) 140px">
+			<div class="container-raylf">
+				<div
+					class="follow-card"
+					style="border-radius:32px;flex-wrap:wrap;justify-content:space-between;align-items:center;padding:0"
+				>
+					<div class="hero-bg" style="background-image:url(/photos/royal-audience.jpg)" />
+					<div
+						style="position:absolute;inset:0;background:linear-gradient(100deg, rgba(63,2,142,.94) 0%, rgba(80,2,185,.85) 45%, rgba(180,73,220,.7) 100%)"
+					/>
+					<div style="position:relative;padding:64px 48px;display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between;width:100%">
+						<div style="display:flex;flex-direction:column;gap:12px">
+							<div style="font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#fff3a8">
+								Follow the journey
+							</div>
+							<div
+								style="font-family:var(--font-display);font-weight:700;font-size:clamp(32px,4vw,56px);letter-spacing:-.03em;color:#fff"
+							>
+								@royalafricanlyf
+							</div>
+						</div>
+						<div class="social-pill">
+							<span class="ic"><i class="fa-brands fa-facebook-f" /></span>
+							<span class="ic"><i class="fa-brands fa-x-twitter" /></span>
+							<span class="ic"><i class="fa-brands fa-instagram" /></span>
+							<span>royalafricanlyf</span>
+							<span class="ic" style="margin-left:10px"><i class="fa-solid fa-globe" /></span>
+							<span>raylf.org</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- LIGHTBOX -->
+		<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true">
+			<img id="lb-img" src="" alt="Gallery photo" />
+			<button class="lb-close" id="lb-close" aria-label="Close"><i class="fa-solid fa-xmark" /></button>
+			<button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous"><i class="fa-solid fa-chevron-left" /></button>
+			<button class="lb-nav lb-next" id="lb-next" aria-label="Next"><i class="fa-solid fa-chevron-right" /></button>
+		</div>
+	</main>
+</Base>
+
+<script>
+	const data = JSON.parse(document.getElementById("gallery-data")?.textContent ?? "[]");
+	const tiles = [...document.querySelectorAll<HTMLElement>(".gallery-tile")];
+	const chips = [...document.querySelectorAll<HTMLElement>("[data-album].chip")];
+	const lb = document.getElementById("lightbox")!;
+	const lbImg = document.getElementById("lb-img") as HTMLImageElement;
+	let album = "All";
+	let open = -1;
+
+	const visible = () => tiles.filter((t) => album === "All" || t.dataset.album === album);
+
+	function render() {
+		chips.forEach((c) => c.classList.toggle("active", c.dataset.album === album));
+		tiles.forEach((t) => (t.style.display = album === "All" || t.dataset.album === album ? "" : "none"));
+	}
+
+	function show(i: number) {
+		const vis = visible();
+		if (!vis.length) return;
+		open = ((i % vis.length) + vis.length) % vis.length;
+		const idx = Number(vis[open].dataset.index);
+		lbImg.src = data[idx]?.image_url ?? "";
+		lbImg.alt = data[idx]?.album ?? "Gallery photo";
+		lb.hidden = false;
+	}
+
+	function close() {
+		lb.hidden = true;
+		open = -1;
+	}
+
+	chips.forEach((c) => c.addEventListener("click", () => {
+		album = c.dataset.album!;
+		close();
+		render();
+	}));
+
+	tiles.forEach((t) =>
+		t.addEventListener("click", () => {
+			const i = visible().indexOf(t);
+			show(i);
+		})
+	);
+
+	document.getElementById("lb-close")?.addEventListener("click", close);
+	document.getElementById("lb-prev")?.addEventListener("click", (e) => {
+		e.stopPropagation();
+		show(open - 1);
+	});
+	document.getElementById("lb-next")?.addEventListener("click", (e) => {
+		e.stopPropagation();
+		show(open + 1);
+	});
+	lb.addEventListener("click", (e) => {
+		if (e.target === lb) close();
+	});
+	window.addEventListener("keydown", (e) => {
+		if (lb.hidden) return;
+		if (e.key === "Escape") close();
+		if (e.key === "ArrowLeft") show(open - 1);
+		if (e.key === "ArrowRight") show(open + 1);
+	});
+
+	render();
+</script>
+
+<script
+	type="application/json"
+	id="gallery-data"
+	set:html={JSON.stringify(photos.map((p) => ({ image_url: p.data.image_url, album: p.data.album })))}
+/>

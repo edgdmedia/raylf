@@ -1,0 +1,24 @@
+---
+interface Props {
+	photo: string;
+	name: string;
+	category?: string;
+	year?: string;
+	country?: string;
+	position?: string | null;
+	href: string;
+}
+const { photo, name, category, year, country, position, href } = Astro.props;
+---
+
+<a href={href} class="awardee-link card-lift" style="display:block">
+	<figure class="awardee-card" style={`background-image:url(${photo});background-position:${position || "center"}`}>
+		<div class="scrim" />
+		<figcaption>
+			{category && <div class="cat">{category}</div>}
+			<div class="name">{name}</div>
+			{(year || country) && <div class="meta">{[country, year].filter(Boolean).join(" · ")}</div>}
+		</figcaption>
+		<div class="topline" />
+	</figure>
+</a>

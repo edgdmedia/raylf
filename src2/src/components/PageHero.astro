@@ -1,0 +1,47 @@
+---
+interface Crumb {
+	label: string;
+	href?: string;
+}
+interface Props {
+	image?: string;
+	crumbs: Crumb[];
+	title: string;
+	goldWord?: string;
+	intro?: string;
+	height?: string;
+	scrim?: "down" | "left";
+}
+const { image, crumbs, title, goldWord, intro, height = "76vh", scrim = "down" } = Astro.props;
+
+const scrimDown =
+	"linear-gradient(180deg, rgba(36,1,69,.6) 0%, rgba(36,1,69,.45) 40%, rgba(36,1,69,.95) 85%, #240145 100%)";
+const scrimLeft =
+	"linear-gradient(90deg, rgba(36,1,69,.94) 0%, rgba(68,3,167,.6) 50%, rgba(80,2,185,.15) 100%)";
+---
+
+<section class="page-hero" style={`min-height:${height}`}>
+	{image && <div class="hero-bg kenburns" style={`background-image:url(${image})`} />}
+	<div style={`position:absolute;inset:0;background:${scrim === "left" ? scrimLeft : scrimDown}`} />
+	<div
+		style="position:absolute;inset:0;background:radial-gradient(50% 50% at 80% 30%, rgba(180,73,220,.4), transparent 70%)"
+	/>
+	<div class="grid-overlay" />
+	<div class="container-raylf page-hero-inner">
+		<div class="breadcrumbs">
+			{
+				crumbs.map((c, i) => (
+					<>
+						{i > 0 && <i class="fa-solid fa-chevron-right" style="font-size:10px" />}
+						{c.href ? <a href={c.href}>{c.label}</a> : <span class="current">{c.label}</span>}
+					</>
+				))
+			}
+		</div>
+		<h1 class="h-display">
+			{title} {goldWord && <span class="gold-foil">{goldWord}</span>}
+		</h1>
+		{intro && <p style="max-width:640px;font-size:19px;line-height:1.6;color:rgba(255,255,255,.82)">{intro}</p>}
+		<slot />
+	</div>
+</section>
