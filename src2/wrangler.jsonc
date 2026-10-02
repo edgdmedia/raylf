@@ -1,0 +1,22 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "raylf-emdash",
+	"account_id": "af273e5d58efe45fa36724c5a3e61052",
+	"main": "./src/worker.ts",
+	"compatibility_date": "2026-10-02",
+	"compatibility_flags": ["nodejs_compat"],
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS"
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "raylf-emdash",
+			"database_id": "f8fd8db9-960e-45cb-a417-a9964c0265d7"
+		}
+	],
+	"triggers": {
+		"crons": ["* * * * *"]
+	}
+}

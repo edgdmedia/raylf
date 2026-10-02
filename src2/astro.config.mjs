@@ -1,12 +1,14 @@
-import node from "@astrojs/node";
+import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
 import { defineConfig } from "astro/config";
-import emdash, { local } from "emdash/astro";
-import { sqlite } from "emdash/db";
+import emdash from "emdash/astro";
+import { d1 } from "@emdash-cms/cloudflare";
 
 export default defineConfig({
 	output: "server",
-	adapter: node({ mode: "standalone" }),
+	adapter: cloudflare({
+		platformProxy: { enabled: true },
+	}),
 	redirects: {
 		"/admin": "/_emdash/admin/",
 	},
@@ -17,11 +19,9 @@ export default defineConfig({
 	integrations: [
 		react(),
 		emdash({
-			database: sqlite({ url: "file:./data.db" }),
-			storage: local({
-				directory: "./uploads",
-				baseUrl: "/_emdash/api/media/file",
-			}),
+			database: d1({ binding: "DB", session: "auto" }),
+			// R2 storage omitted until R2 is enabled on the account; all site
+			// imagery is served from static assets via url fields.
 			admin: {
 				logo: "/favicon.png",
 				siteName: "RAYLF CMS",
