@@ -1,28 +1,22 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"main": ".open-next/worker.js",
-	"name": "raylf-website",
-	"account_id": "af273e5d58efe45fa36724c5a3e61052",
-	"compatibility_date": "2026-10-01",
-	"compatibility_flags": [
-		"nodejs_compat",
-		"global_fetch_strictly_public"
-	],
+	"name": "raylf",
+	"account_id": "3a1a378bdf2b8bc66490838fe500dce4",
+	"main": "./src/worker.ts",
+	"compatibility_date": "2026-10-02",
+	"compatibility_flags": ["nodejs_compat"],
 	"assets": {
-		"directory": ".open-next/assets",
+		"directory": "./dist",
 		"binding": "ASSETS"
 	},
-	"services": [
+	"d1_databases": [
 		{
-			// Self-reference service binding, the service name must match the worker name
-			// see https://opennext.js.org/cloudflare/caching
-			"binding": "WORKER_SELF_REFERENCE",
-			"service": "raylf-website"
+			"binding": "DB",
+			"database_name": "raylf",
+			"database_id": "a47b87a5-d4d9-411e-a7e5-f245f6fd063a"
 		}
 	],
-	"images": {
-		// Enable image optimization
-		// see https://opennext.js.org/cloudflare/howtos/image
-		"binding": "IMAGES"
+	"triggers": {
+		"crons": ["* * * * *"]
 	}
 }
