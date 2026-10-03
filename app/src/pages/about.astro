@@ -1,0 +1,174 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import Eyebrow from "../components/Eyebrow.astro";
+import RoyalQuote from "../components/RoyalQuote.astro";
+import { editions } from "../data";
+
+const milestones = [...editions].sort((a, b) => a.data.year.localeCompare(b.data.year));
+
+const pillars = [
+	{ n: "01", title: "Shaping", body: "Recognising young leaders early and setting a standard of excellence rooted in African heritage." },
+	{ n: "02", title: "Transforming", body: "Equipping young Africans to turn ideas into enterprises, institutions and movements." },
+	{ n: "03", title: "Anchoring", body: "Connecting each generation of leaders to the royal institutions and culture of the continent." },
+];
+---
+
+<Base title="About">
+	<PageHero
+		image="/photos/royal-audience.jpg"
+		crumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
+		title="Our"
+		goldWord="History"
+		intro="A programme of the Royal African Foundation, convening the most outstanding 20 to 39-year olds across the globe under royal patronage."
+		height="78vh"
+	/>
+
+	<!-- WHO WE ARE -->
+	<section class="section-pad">
+		<div class="container-raylf grid-2" style="align-items:start">
+			<div class="flex-col gap-6" style="position:sticky;top:120px">
+				<Eyebrow>Who We Are</Eyebrow>
+				<h2 class="h-section">Rooted in the Kingdoms of Africa.</h2>
+			</div>
+			<div class="flex-col gap-6">
+				<p style="font-size:20px;line-height:1.65;color:var(--t-fg)">
+					RAYLF&rsquo;s mission is to redefine centuries of the rich resilient
+					spirit of African Kingdoms which embodies many defining principles of
+					its identity.
+				</p>
+				<p class="muted" style="font-size:18px;line-height:1.7">
+					The Royal African Young Leadership Forum is a programme of the Royal
+					African Foundation of His Imperial Majesty Oba Adeyeye Enitan Ogunwusi,
+					Ojaja II, the 51st Ooni of Ife. It recognises and convenes young African
+					leaders aged 20 to 39, chiefly through the RAYLF Awards.
+				</p>
+				<p class="muted" style="font-size:18px;line-height:1.7">
+					Through the Awards and programmes such as G2G Millionaires, RAYLF
+					celebrates the success stories of young leaders and connects them to
+					Africa&rsquo;s economic prosperity, the blessings of its natural resources
+					and the valuable inheritance of its creative culture.
+				</p>
+				<div
+					class="teaser-tile"
+					style="margin-top:24px;aspect-ratio:16/10;background-image:url(/photos/award-presentation-03.jpg);box-shadow:var(--t-shadow)"
+				/>
+			</div>
+		</div>
+	</section>
+
+	<!-- PILLARS -->
+	<section class="section-pad" style="background:var(--t-sec)">
+		<div class="container-raylf flex-col gap-14">
+			<div class="flex-col gap-5" style="max-width:720px">
+				<Eyebrow>Our Mission</Eyebrow>
+				<h2 class="h-section">Shaping. Transforming. Anchoring.</h2>
+			</div>
+			<div
+				style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1px;background:var(--t-line);border-radius:var(--radius-lg);overflow:hidden"
+			>
+				{
+					pillars.map((p) => (
+						<div
+							style={`background:var(--t-bg);padding:40px 32px;display:flex;flex-direction:column;gap:18px;min-height:280px`}
+						>
+							<span style="font-family:var(--font-display);font-weight:600;font-size:14px;letter-spacing:.1em;color:var(--t-gold)">
+								{p.n}
+							</span>
+							<h3 style="margin-top:auto;font-size:32px;letter-spacing:-.02em;color:var(--t-fg)">{p.title}</h3>
+							<p class="muted" style="font-size:16px;line-height:1.65">{p.body}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- ROYAL PATRON -->
+	<section style="position:relative;padding:140px 0;background:#240145;color:#fff;overflow:hidden">
+		<div
+			style="position:absolute;right:-200px;top:50%;width:800px;height:800px;transform:translateY(-50%);border-radius:50%;background:radial-gradient(circle, rgba(180,73,220,.35) 0%, rgba(180,73,220,0) 65%)"
+		/>
+		<div class="container-raylf grid-2" style="gap:80px;position:relative">
+			<div class="framed">
+				<div class="portrait" style="background-image:url(/photos/his-majesty-throne.jpg)" />
+			</div>
+			<div class="flex-col gap-7">
+				<Eyebrow tone="light">Royal Patron</Eyebrow>
+				<h2
+					style="font-family:var(--font-display);font-weight:700;font-size:clamp(34px,4vw,56px);line-height:1.1;letter-spacing:-.03em;color:#fff"
+				>
+					His Imperial Majesty Oba Adeyeye Enitan Ogunwusi, Ojaja II
+				</h2>
+				<p style="font-size:18px;line-height:1.7;color:rgba(255,255,255,.8)">
+					The 51st Ooni of Ife and founder of the Royal African Foundation, under
+					whose patronage RAYLF recognises young African leaders.
+				</p>
+				<RoyalQuote tone="dark" size="lg" attribution="His Imperial Majesty (H.I.M) Ooni of Ife">
+					Young Africans are the spirit, soul and memory of Africa.
+				</RoyalQuote>
+			</div>
+		</div>
+	</section>
+
+	<!-- MILESTONES -->
+	<section class="section-pad">
+		<div class="container-raylf flex-col gap-14" style="gap:64px">
+			<div class="flex-col gap-5">
+				<Eyebrow>Milestones</Eyebrow>
+				<h2 class="h-section">The RAYLF Awards</h2>
+			</div>
+			<div
+				style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:32px"
+			>
+				{
+					milestones.map((m) => (
+						<a href={`/awards/${m.data.year}`} class="milestone">
+							<div style="display:flex;align-items:center;gap:12px">
+								<span class="milestone-dot" />
+								<span class="milestone-line" />
+							</div>
+							<div class="year">{m.data.year}</div>
+							<div class="muted" style="font-size:16px;line-height:1.6">
+								{m.data.upcoming
+									? `Upcoming edition — happening in ${m.data.location}`
+									: `${m.data.tag} of the RAYLF Awards`}
+							</div>
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<section style="padding:0 var(--container-pad) 120px">
+		<div class="container-raylf">
+			<div class="cta-panel" style="padding:80px 48px;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;text-align:left">
+				<h2
+					style="font-family:var(--font-display);font-weight:700;font-size:clamp(34px,4.5vw,64px);line-height:1.1;letter-spacing:-.03em;color:#fff;max-width:640px"
+				>
+					Explore our programmes.
+				</h2>
+				<a class="btn btn-gold btn-lg" href="/programmes">Programmes <i class="fa-solid fa-arrow-right" /></a>
+			</div>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.milestone-dot {
+		width: 14px;
+		height: 14px;
+		border-radius: 50%;
+		background: var(--gradient-gold);
+		box-shadow: 0 0 16px rgba(242, 184, 75, 0.6);
+		flex: none;
+	}
+	.milestone-line {
+		flex: 1;
+		height: 2px;
+		border-radius: 2px;
+		background: var(--t-line);
+	}
+</style>

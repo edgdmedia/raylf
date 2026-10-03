@@ -1,0 +1,10 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "raylf",
+	"account_id": "3a1a378bdf2b8bc66490838fe500dce4",
+	"compatibility_date": "2026-10-02",
+	"assets": {
+		"directory": "./dist/client",
+		"binding": "ASSETS"
+	}
+}

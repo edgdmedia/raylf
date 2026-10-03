@@ -1,0 +1,64 @@
+---
+import "../styles/globals.css";
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { siteSettings } from "../data";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title, description } = Astro.props;
+const siteTitle = siteSettings.title;
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title ? `${title} | RAYLF` : siteTitle}</title>
+		<meta name="description" content={description ?? siteSettings.description} />
+		<link rel="icon" href="/favicon.png" type="image/png" />
+		<link rel="apple-touch-icon" href="/favicon.png" />
+		{
+			siteSettings.googleAnalyticsId && (
+				<>
+					<script
+						async
+						src={`https://www.googletagmanager.com/gtag/js?id=${siteSettings.googleAnalyticsId}`}
+					/>
+					<script is:inline define:vars={{ gaId: siteSettings.googleAnalyticsId }}>
+						{`window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag('js', new Date());
+						gtag('config', gaId, { send_page_view: true });`}
+					</script>
+				</>
+			)
+		}
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<script is:inline>
+			(function () {
+				try {
+					var t = localStorage.getItem("raylf-theme");
+					if (t !== "light" && t !== "dark") t = "dark";
+					document.documentElement.setAttribute("data-theme", t);
+				} catch (e) {
+					document.documentElement.setAttribute("data-theme", "dark");
+				}
+			})();
+		</script>
+	</head>
+	<body>
+		<SiteNav />
+		<slot />
+		<SiteFooter />
+	</body>
+</html>

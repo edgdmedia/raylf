@@ -1,9 +1,0 @@
-node_modules/
-dist/
-.astro/
-data.db*
-uploads/
-.emdash/
-.env
-
-.wrangler/

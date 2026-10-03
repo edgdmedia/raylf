@@ -1,0 +1,64 @@
+---
+import { menus } from "../data";
+
+const menuItems = menus.primary;
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) =>
+	href === "/" ? pathname === "/" : pathname.startsWith(href);
+---
+
+<div class="nav-wrap" id="nav-wrap">
+	<div class="nav-pill">
+		<a href="/" aria-label="RAYLF home" class="nav-logo">
+			<img src="/logo/raylf-logo-white.png" alt="RAYLF" style="height:40px;width:auto" />
+		</a>
+		<nav class="nav-links">
+			{
+				menuItems.map((l: any) => (
+					<a
+						href={l.url}
+						class:list={{ "nav-link": true, active: isActive(l.url) }}
+					>
+						{l.label}
+					</a>
+				))
+			}
+		</nav>
+		<div class="nav-right">
+			<span class="nav-cta">
+				<a class="btn btn-gold btn-sm" href="/awards#awardees">
+					Awardees <i class="fa-solid fa-arrow-right" />
+				</a>
+			</span>
+			<button class="nav-burger" id="nav-burger" aria-label="Menu">
+				<i class="fa-solid fa-bars" />
+			</button>
+		</div>
+		<nav class="nav-mobile" id="nav-mobile">
+			{
+				menuItems.map((l: any) => (
+					<a href={l.url} class:list={{ "nav-link": true, active: isActive(l.url) }}>
+						{l.label}
+					</a>
+				))
+			}
+		</nav>
+	</div>
+</div>
+
+<script>
+	function initNav() {
+		const wrap = document.getElementById("nav-wrap");
+		const burger = document.getElementById("nav-burger") as HTMLButtonElement | null;
+		const mobile = document.getElementById("nav-mobile");
+
+		const onScroll = () => wrap?.classList.toggle("scrolled", window.scrollY > 24);
+		onScroll();
+		window.addEventListener("scroll", onScroll, { passive: true });
+
+		burger?.addEventListener("click", () => mobile?.classList.toggle("open"));
+	}
+	initNav();
+	document.addEventListener("astro:page-load", initNav);
+</script>

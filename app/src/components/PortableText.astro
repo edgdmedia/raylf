@@ -1,0 +1,64 @@
+---
+import type { PortableTextBlock } from "../data/types";
+
+interface Props {
+	value: PortableTextBlock[];
+}
+
+const { value = [] } = Astro.props;
+
+const styleTag: Record<string, string> = {
+	normal: "p",
+	h1: "h1",
+	h2: "h2",
+	h3: "h3",
+	h4: "h4",
+	blockquote: "blockquote",
+};
+
+function renderSpan(span: PortableTextBlock["children"][number]) {
+	let html = span.text
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;");
+	for (const mark of span.marks ?? []) {
+		if (mark === "strong") html = `<strong>${html}</strong>`;
+		else if (mark === "em") html = `<em>${html}</em>`;
+		else if (mark === "code") html = `<code>${html}</code>`;
+	}
+	return html;
+}
+
+type Node =
+	| { kind: "block"; tag: string; inner: string }
+	| { kind: "list"; tag: "ul" | "ol"; items: string[] };
+
+const nodes: Node[] = [];
+for (const block of value) {
+	const inner = block.children.map(renderSpan).join("");
+	const style = block.style ?? "normal";
+	if (style === "bullet" || style === "numbered") {
+		const tag = style === "bullet" ? "ul" : "ol";
+		const last = nodes[nodes.length - 1];
+		if (last?.kind === "list" && last.tag === tag) last.items.push(inner);
+		else nodes.push({ kind: "list", tag, items: [inner] });
+	} else {
+		nodes.push({ kind: "block", tag: styleTag[style] ?? "p", inner });
+	}
+}
+---
+
+{
+	nodes.map((node) => {
+		if (node.kind === "list") {
+			const List = node.tag as "ul";
+			return (
+				<List>
+					{node.items.map((item) => <li set:html={item} />)}
+				</List>
+			);
+		}
+		const Tag = node.tag as "p";
+		return <Tag set:html={node.inner} />;
+	})
+}
