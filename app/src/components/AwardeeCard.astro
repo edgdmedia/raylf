@@ -1,6 +1,8 @@
 ---
+import { placeholderImage } from "../lib/awardee-image";
+
 interface Props {
-	photo: string;
+	photo: string | null;
 	name: string;
 	category?: string;
 	year?: string;
@@ -9,10 +11,11 @@ interface Props {
 	href: string;
 }
 const { photo, name, category, year, country, position, href } = Astro.props;
+const image = photo || placeholderImage(name);
 ---
 
 <a href={href} class="awardee-link card-lift" style="display:block">
-	<figure class="awardee-card" style={`background-image:url(${photo});background-position:${position || "center"}`}>
+	<figure class="awardee-card" style={`background-image:url(${image});background-position:${photo ? position || "center" : "center"}`}>
 		<div class="scrim" />
 		<figcaption>
 			{category && <div class="cat">{category}</div>}

@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import Eyebrow from "../../components/Eyebrow.astro";
 import AwardeeCard from "../../components/AwardeeCard.astro";
+import { placeholderImage } from "../../lib/awardee-image";
 import { awardees } from "../../data";
 
 export function getStaticPaths() {
@@ -10,6 +11,8 @@ export function getStaticPaths() {
 
 const { a } = Astro.props as { a: (typeof awardees)[number] };
 const more = awardees.filter((x) => x.data.year === a.data.year && x.id !== a.id).slice(0, 4);
+const portrait = a.data.photo_url || placeholderImage(a.data.title);
+const bio = `Recognised at the ${a.data.year} RAYLF Awards for outstanding achievement in ${String(a.data.category).toLowerCase()} and an unwavering commitment to shaping, transforming and anchoring the future of the continent.`;
 
 const momentPhotos = [
 	"/photos/award-presentation-01.jpg",
@@ -26,7 +29,7 @@ const momentPhotos = [
 			<div class="framed" style="position:relative;max-width:480px">
 				<div
 					class="portrait"
-					style={`background-image:url(${a.data.photo_url});background-position:${a.data.photo_position || "center"}`}
+					style={`background-image:url(${portrait});background-position:${a.data.photo_url ? a.data.photo_position || "center" : "center"}`}
 				/>
 				<div
 					style="position:absolute;top:-24px;left:-24px;width:96px;height:96px;border-radius:50%;background:var(--gradient-gold);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--violet-950);z-index:2"
@@ -62,10 +65,7 @@ const momentPhotos = [
 					</span>
 				</div>
 				<p style="max-width:560px;font-size:18px;line-height:1.7;color:rgba(255,255,255,.8)">
-					{a.data.role}. Recognised at the {a.data.year} RAYLF Awards for
-					outstanding achievement in {String(a.data.category).toLowerCase()} and an
-					unwavering commitment to shaping, transforming and anchoring the future
-					of the continent.
+					{a.data.role ? `${a.data.role}. ` : ""}{bio}
 				</p>
 				<div class="social-icons">
 					<a href="#" aria-label="facebook"><i class="fa-brands fa-facebook-f" /></a>
@@ -124,7 +124,7 @@ const momentPhotos = [
 						{more.map((m) => (
 							<AwardeeCard
 								href={`/awardee/${m.id}`}
-								photo={m.data.photo_url ?? ""}
+								photo={m.data.photo_url}
 								name={m.data.title}
 								category={m.data.category ?? undefined}
 								country={m.data.country ?? undefined}

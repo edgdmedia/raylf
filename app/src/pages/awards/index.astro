@@ -7,7 +7,13 @@ import { editions, awardees } from "../../data";
 
 const sorted = [...editions].sort((a, b) => b.data.year.localeCompare(a.data.year));
 
-const categories = ["All", "Entrepreneurship", "Public Service", "Creative Arts", "Technology", "Philanthropy"];
+// Category chips are per-year: different editions use different award categories.
+const categoriesByYear: Record<string, string[]> = {};
+for (const a of awardees) {
+	if (!a.data.year || !a.data.category) continue;
+	const cats = (categoriesByYear[a.data.year] ??= []);
+	if (!cats.includes(a.data.category)) cats.push(a.data.category);
+}
 ---
 
 <Base title="RAYLF Awards">
@@ -80,10 +86,18 @@ const categories = ["All", "Entrepreneurship", "Public Service", "Creative Arts"
 					</div>
 					<div id="cat-chips" style="display:flex;gap:8px;flex-wrap:wrap">
 						{
-							categories.map((c) => (
-								<button class:list={{ chip: true, active: c === "All" }} data-cat={c}>
-									{c}
-								</button>
+							Object.entries(categoriesByYear).map(([y, cats]) => (
+								<div
+									class="cat-set"
+									data-chips-year={y}
+									style={`gap:8px;flex-wrap:wrap;${y === "2024" ? "display:flex" : "display:none"}`}
+								>
+									{["All", ...cats].map((c) => (
+										<button class:list={{ chip: true, active: c === "All" }} data-cat={c}>
+											{c}
+										</button>
+									))}
+								</div>
 							))
 						}
 					</div>
@@ -110,7 +124,7 @@ const categories = ["All", "Entrepreneurship", "Public Service", "Creative Arts"
 							>
 								<AwardeeCard
 									href={`/awardee/${a.id}`}
-									photo={a.data.photo_url ?? ""}
+									photo={a.data.photo_url}
 									name={a.data.title}
 									category={a.data.category ?? undefined}
 									country={a.data.country ?? undefined}
@@ -157,6 +171,7 @@ const categories = ["All", "Entrepreneurship", "Public Service", "Creative Arts"
 <script>
 	const yearTabs = [...document.querySelectorAll<HTMLElement>("[data-year].year-tab")];
 	const chips = [...document.querySelectorAll<HTMLElement>("[data-cat]")];
+	const chipSets = [...document.querySelectorAll<HTMLElement>("[data-chips-year]")];
 	const cells = [...document.querySelectorAll<HTMLElement>(".awardee-cell")];
 	const slides = [...document.querySelectorAll<HTMLElement>("[data-edition-slide]")];
 	const yearLabel = document.getElementById("awards-year");
@@ -175,7 +190,10 @@ const categories = ["All", "Entrepreneurship", "Public Service", "Creative Arts"
 
 	function render() {
 		yearTabs.forEach((t) => t.classList.toggle("active", t.dataset.year === year));
-		chips.forEach((c) => c.classList.toggle("active", c.dataset.cat === cat));
+		chipSets.forEach((s) => (s.style.display = s.dataset.chipsYear === year ? "flex" : "none"));
+		chips.forEach((c) =>
+			c.classList.toggle("active", c.dataset.cat === cat && c.parentElement?.dataset.chipsYear === year)
+		);
 		slides.forEach((s) => (s.style.opacity = s.dataset.editionSlide === year ? "1" : "0"));
 
 		const ed = editionData[year] ?? {};

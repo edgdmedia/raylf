@@ -40,6 +40,7 @@ export type Awardee = Entry<{
 	title: string;
 	category: string | null;
 	role: string | null;
+	gender: string | null;
 	country: string | null;
 	year: string | null;
 	photo_url: string | null;
