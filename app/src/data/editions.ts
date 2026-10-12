@@ -158,11 +158,11 @@ export const editions: Edition[] = [
 			"upcoming": false,
 			"stats": [
 				{
-					"v": "11+",
+					"v": "100",
 					"l": "Awardees announced"
 				},
 				{
-					"v": "6",
+					"v": "5",
 					"l": "Award categories"
 				},
 				{
