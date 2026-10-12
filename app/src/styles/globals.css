@@ -292,7 +292,7 @@ button {
 }
 
 .nav-wrap.scrolled {
-	padding: 8px 16px 0;
+	padding: 0;
 }
 
 .nav-pill {
@@ -311,8 +311,14 @@ button {
 	transition: all 0.3s var(--ease-standard);
 }
 
+/* Full-width bar on scroll, but the logo/menu/CTA stay inside the content
+   width: side padding grows to (viewport - container)/2 + base padding. */
 .nav-wrap.scrolled .nav-pill {
-	padding: 8px 12px 8px 24px;
+	max-width: none;
+	border-radius: 0;
+	padding: 10px
+		max(12px, calc((100% - var(--container-max)) / 2 + 24px)) 10px
+		max(24px, calc((100% - var(--container-max)) / 2 + 24px));
 	background: rgba(36, 1, 69, 0.97);
 	box-shadow: 0 8px 32px rgba(10, 0, 25, 0.5);
 }
